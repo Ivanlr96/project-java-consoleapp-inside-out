@@ -15,7 +15,7 @@ public class HomeView extends View{
 
             System.out.println(text);
 
-            int option = scanner.nextInt();
+            int option = SCANNER.nextInt();
     }
 
 }
