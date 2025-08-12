@@ -2,10 +2,9 @@ package dev.ivan.views;
 
 import dev.ivan.controllers.MomentController;
 
-public class HomeView extends View{
+public class HomeView extends View {
 
-
-  public static final MomentController momentController = new MomentController();
+    public static final MomentController momentController = new MomentController();
 
     public static void printMenu() {
 
@@ -18,16 +17,19 @@ public class HomeView extends View{
                 Seleccione una opción:
                 """;
 
-            System.out.println(text);
+        System.out.println(text);
 
-            int option = SCANNER.nextInt();
+        int option = SCANNER.nextInt();
 
-            if (option == 1) {
-                MomentPostView.printStoreMenu();
-            }
-            if (option == 2) {
-                momentController.ShowAllMoments();
-            }
+        if (option == 1) {
+            MomentPostView.printStoreMenu();
+        }
+        if (option == 2) {
+            momentController.ShowAllMoments();
+        }
+        if (option == 3) {
+            MomentDeleteView.printDeleteMenu();
+        }
 
     }
 

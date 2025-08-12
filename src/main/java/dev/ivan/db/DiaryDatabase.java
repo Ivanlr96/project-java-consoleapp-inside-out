@@ -20,5 +20,14 @@ public class DiaryDatabase {
         return moments;
     }
 
+
+    public boolean deleteMoment(int index) {
+    if (index >= 0 && index < moments.size()) {
+        moments.remove(index);
+        return true;
+    }
+    return false;
+}
+
 }
 

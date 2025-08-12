@@ -19,4 +19,8 @@ public class MomentRepository {
        public List<Moment> getAllMoments() {
         return db.getAll();
     }
+
+    public boolean deleteMoment(int index) {
+    return db.deleteMoment(index);
+    }
 }
