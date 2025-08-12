@@ -25,5 +25,11 @@ public class Moment {
         return description;
     }
 
+        @Override
+    public String toString() {
+        return "Título: " + title + "\n" +
+               "Fecha: " + date + "\n" +
+               "Descripción: " + description + "\n";
+    }
 
 }

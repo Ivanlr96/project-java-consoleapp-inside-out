@@ -1,6 +1,11 @@
 package dev.ivan.views;
 
+import dev.ivan.controllers.MomentController;
+
 public class HomeView extends View{
+
+
+  public static final MomentController momentController = new MomentController();
 
     public static void printMenu() {
 
@@ -16,6 +21,14 @@ public class HomeView extends View{
             System.out.println(text);
 
             int option = SCANNER.nextInt();
+
+            if (option == 1) {
+                MomentPostView.printStoreMenu();
+            }
+            if (option == 2) {
+                momentController.ShowAllMoments();
+            }
+
     }
 
 }

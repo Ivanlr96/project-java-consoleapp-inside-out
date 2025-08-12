@@ -2,10 +2,10 @@ package dev.ivan.views;
 
 import dev.ivan.controllers.MomentController;
 import dev.ivan.dtos.MomentDTO;
-
+import dev.ivan.views.HomeView;
 public class MomentPostView extends View {
 
-    private static MomentController  CONTROLLER = new MomentController();
+    private static MomentController CONTROLLER = HomeView.momentController;
 
     public static void printStoreMenu() {
         System.out.println("Ingrese el título:");
@@ -17,9 +17,7 @@ public class MomentPostView extends View {
 
         MomentDTO momentDTO = new MomentDTO(title, date, description);
         CONTROLLER.StoreMoment(momentDTO);
+        HomeView.printMenu();
 
     }
-
-
-
 }

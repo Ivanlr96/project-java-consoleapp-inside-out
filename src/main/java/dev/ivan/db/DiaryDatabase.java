@@ -16,6 +16,9 @@ public class DiaryDatabase {
         moments.add(moment);
     }
 
+     public List<Moment> getAll() {
+        return moments;
+    }
 
 }
 

@@ -1,5 +1,7 @@
 package dev.ivan.repositories;
 
+import java.util.List;
+
 import dev.ivan.db.DiaryDatabase;
 import dev.ivan.models.Moment;
 
@@ -14,5 +16,7 @@ public class MomentRepository {
     public void StoreMoment(Moment moment) {
         db.store(moment);
     }
-
+       public List<Moment> getAllMoments() {
+        return db.getAll();
+    }
 }
