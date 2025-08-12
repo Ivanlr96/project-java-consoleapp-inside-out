@@ -1,5 +1,7 @@
 package dev.ivan.dtos;
 
-public record MomentDTO(String title, String date, String description) {
+import dev.ivan.models.EmotionEnum;
+
+public record MomentDTO(String title, String date, String description, EmotionEnum emotion) {
 
 }
