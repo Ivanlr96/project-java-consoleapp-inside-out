@@ -11,10 +11,13 @@ public enum EmotionEnum {
     VERGUENZA("Vergüenza"),
     ABURRIMIENTO("Aburrimiento"),
     NOSTALGIA("Nostalgia");
+
     private final String displayName;
+
     EmotionEnum(String displayName) {
         this.displayName = displayName;
     }
+
     public String getDisplayName() {
         return displayName;
     }
