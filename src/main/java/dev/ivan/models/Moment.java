@@ -1,13 +1,15 @@
 package dev.ivan.models;
 
+import java.time.LocalDate;
+
 public class Moment {
 
     private String title;
-    private String date;
+    private LocalDate date;
     private String description;
     private EmotionEnum emotion;
 
-    public Moment(String title, String date, String description, EmotionEnum emotion) {
+    public Moment(String title, LocalDate date, String description, EmotionEnum emotion) {
         this.title = title;
         this.date = date;
         this.description = description;
@@ -18,7 +20,7 @@ public class Moment {
         return title;
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
