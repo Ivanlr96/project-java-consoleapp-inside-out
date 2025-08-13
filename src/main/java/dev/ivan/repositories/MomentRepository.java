@@ -1,5 +1,7 @@
 package dev.ivan.repositories;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import dev.ivan.db.DiaryDatabase;
@@ -30,5 +32,15 @@ public List<Moment> getMomentsByEmotion(EmotionEnum emotion) {
         .filter(m -> m.getEmotionEnum() == emotion)
         .toList();
 }
+
+   public List<Moment> getMomentsByDate(LocalDate date) {
+        List<Moment> filtered = new ArrayList<>();
+        for (Moment moment : db.getAll()) {
+            if (moment.getDate().isEqual(date)) {
+                filtered.add(moment);
+            }
+        }
+        return filtered;
+    }
 
 }

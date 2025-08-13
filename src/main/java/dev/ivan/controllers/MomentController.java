@@ -1,5 +1,6 @@
 package dev.ivan.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import dev.ivan.dtos.MomentDTO;
@@ -49,5 +50,17 @@ public void ShowAllMoments() {
         moments.forEach(System.out::println);
     }
 }
+
+public void showMomentsByDate(LocalDate date) {
+    List<Moment> moments = repository.getMomentsByDate(date);
+    if (moments.isEmpty()) {
+        System.out.println("No hay momentos en la fecha seleccionada.");
+    } else {
+        moments.forEach(System.out::println);
+    }
+}
+    public List<Moment> getMomentsByDate(LocalDate date) {
+        return repository.getMomentsByDate(date);
+    }
 
 }

@@ -12,7 +12,7 @@ public class MomentFilterView extends View {
         if (choice == 1) {
             MomenFilterByEmotionView.printFilterMenu();
         } else if (choice == 2) {
-
+            MomentFilterByDateView.printFilterMenu();
         } else if (choice == 3) {
             HomeView.printMenu();
         } else {
