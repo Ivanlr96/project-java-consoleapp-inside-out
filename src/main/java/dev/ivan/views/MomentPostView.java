@@ -2,6 +2,7 @@ package dev.ivan.views;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
 
 import dev.ivan.controllers.MomentController;
 import dev.ivan.dtos.MomentDTO;
@@ -16,7 +17,7 @@ public class MomentPostView extends View {
         System.out.println("Ingrese el título:");
         String title = SCANNER.next();
              LocalDate date = null;
-        java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         while (date == null) {
             System.out.println("Ingrese la fecha (dd/MM/yyyy):");
             String dateInput = SCANNER.next();

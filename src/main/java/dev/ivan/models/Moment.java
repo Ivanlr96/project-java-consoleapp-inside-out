@@ -28,7 +28,7 @@ public class Moment {
         return description;
     }
 
-    public EmotionEnum gEmotionEnum() {
+    public EmotionEnum getEmotionEnum() {
         return emotion;
     }
 
@@ -40,5 +40,6 @@ public class Moment {
                 "Emotion: " + emotion.getDisplayName() + "\n";
 
     }
+
 
 }
