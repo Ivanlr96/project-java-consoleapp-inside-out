@@ -19,7 +19,7 @@ public class MomentController {
 
 public void StoreMoment(MomentDTO MomentDTO) {
     Moment momentToSave = MomentMapper.toEntity(MomentDTO);
-    repository.StoreMoment(momentToSave);
+    repository.storeMoment(momentToSave);
 
 }
 

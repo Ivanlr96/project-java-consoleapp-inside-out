@@ -1,11 +1,12 @@
 package dev.ivan.db;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import dev.ivan.contracts.InterfaceDatabase;
 import dev.ivan.models.Moment;
 
-public class DiaryDatabase {
+import java.util.ArrayList;
+import java.util.List;
+
+public class DiaryDatabase implements InterfaceDatabase<Moment> {
 
     private List<Moment> moments;
 
@@ -13,23 +14,22 @@ public class DiaryDatabase {
         this.moments = new ArrayList<>();
     }
 
+    @Override
     public void store(Moment moment) {
         moments.add(moment);
     }
 
-     public List<Moment> getAll() {
+    @Override
+    public List<Moment> getAll() {
         return moments;
     }
 
-
-    public boolean deleteMoment(int index) {
-    if (index >= 0 && index < moments.size()) {
-        moments.remove(index);
-        return true;
+    @Override
+    public boolean delete(int index) {
+        if (index >= 0 && index < moments.size()) {
+            moments.remove(index);
+            return true;
+        }
+        return false;
     }
-    return false;
 }
-
-
-}
-
