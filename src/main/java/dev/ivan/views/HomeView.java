@@ -1,10 +1,11 @@
 package dev.ivan.views;
 
 import dev.ivan.controllers.MomentController;
+import dev.ivan.singletons.MomentControllerSingleton;
 
 public class HomeView extends View {
-
-    public static final MomentController momentController = new MomentController();
+    
+    public static final MomentController momentController = MomentControllerSingleton.getInstance();
 
     public static void printMenu() {
 

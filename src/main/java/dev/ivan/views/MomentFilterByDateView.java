@@ -2,6 +2,8 @@ package dev.ivan.views;
 
 import dev.ivan.controllers.MomentController;
 import dev.ivan.models.Moment;
+import dev.ivan.singletons.MomentControllerSingleton;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -9,7 +11,7 @@ import java.util.List;
 
 public class MomentFilterByDateView extends View {
 
-    private static MomentController CONTROLLER = HomeView.momentController;
+    private static MomentController CONTROLLER = MomentControllerSingleton.getInstance();
 
     public static void printFilterMenu() {
         System.out.println("Ingrese la fecha para filtrar (dd/MM/yyyy):");

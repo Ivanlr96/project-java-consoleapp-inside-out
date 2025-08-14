@@ -6,6 +6,7 @@ import java.util.List;
 import dev.ivan.dtos.MomentDTO;
 import dev.ivan.mappers.MomentMapper;
 import dev.ivan.repositories.MomentRepository;
+import dev.ivan.singletons.MomentRepositorySingleton;
 import dev.ivan.models.EmotionEnum;
 import dev.ivan.models.Moment;
 
@@ -14,8 +15,9 @@ public class MomentController {
  private MomentRepository repository;
 
  public MomentController() {
-  this.repository = new MomentRepository();
+  this.repository = MomentRepositorySingleton.getInstance();
  }
+
 
 public void StoreMoment(MomentDTO MomentDTO) {
     Moment momentToSave = MomentMapper.toEntity(MomentDTO);

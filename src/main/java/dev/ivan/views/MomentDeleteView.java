@@ -2,12 +2,13 @@ package dev.ivan.views;
 
 import dev.ivan.controllers.MomentController;
 import dev.ivan.models.Moment;
+import dev.ivan.singletons.MomentControllerSingleton;
 
 import java.util.List;
 
 public class MomentDeleteView extends View {
 
-    private static MomentController CONTROLLER = HomeView.momentController;
+    private static MomentController CONTROLLER = MomentControllerSingleton.getInstance();
 
     public static void printDeleteMenu() {
 

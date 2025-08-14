@@ -8,10 +8,11 @@ import dev.ivan.controllers.MomentController;
 import dev.ivan.dtos.MomentDTO;
 import dev.ivan.views.HomeView;
 import dev.ivan.models.EmotionEnum;
+import dev.ivan.singletons.MomentControllerSingleton;
 
 public class MomentPostView extends View {
 
-    private static MomentController CONTROLLER = HomeView.momentController;
+  private static MomentController CONTROLLER = MomentControllerSingleton.getInstance();
 
     public static void printStoreMenu() {
         System.out.println("Ingrese el título:");

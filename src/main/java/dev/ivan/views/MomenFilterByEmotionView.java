@@ -2,10 +2,11 @@ package dev.ivan.views;
 
 import dev.ivan.controllers.MomentController;
 import dev.ivan.models.EmotionEnum;
+import dev.ivan.singletons.MomentControllerSingleton;
 
 public class MomenFilterByEmotionView extends View {
 
-    private static MomentController CONTROLLER = HomeView.momentController;
+    private static MomentController CONTROLLER = MomentControllerSingleton.getInstance();
 
     public static void printFilterMenu() {
         System.out.println("Seleccione la emoción para filtrar:");
