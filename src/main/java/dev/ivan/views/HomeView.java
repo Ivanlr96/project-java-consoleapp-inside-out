@@ -10,6 +10,7 @@ public class HomeView extends View {
     public static void printMenu() {
 
         String text = """
+                Mi diario:
                 1. Añadir momento
                 2. Ver todos los momentos disponibles
                 3. Eliminar un momento
@@ -37,7 +38,7 @@ public class HomeView extends View {
         }
 
         if (option == 5) {
-            System.out.println("Saliendo...");
+            System.out.println("¡Hasta la proxima!");
             System.exit(0);
         }
 
