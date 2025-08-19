@@ -22,7 +22,12 @@ public class MomentDeleteView extends View {
 
         System.out.println("Momentos guardados:");
         for (int i = 0; i < moments.size(); i++) {
-            System.out.println((i + 1) + ". " + moments.get(i));
+            MomentResponseDTO m = moments.get(i);
+            System.out.println((i + 1) + ". " +
+                    "Ocurrió el: " + m.date() + ". " +
+                    "Título: " + m.title() + ". " +
+                    "Descripción: " + m.description() + ". ");
+
         }
 
         System.out.println("Seleccione el número del momento que desea eliminar:");
