@@ -1,6 +1,7 @@
 package dev.ivan.views;
 
 import dev.ivan.controllers.MomentController;
+import dev.ivan.dtos.MomentResponseDTO;
 import dev.ivan.models.Moment;
 import dev.ivan.singletons.MomentControllerSingleton;
 
@@ -27,13 +28,19 @@ public class MomentFilterByDateView extends View {
             return;
         }
 
-        List<Moment> moments = CONTROLLER.getMomentsByDate(date);
+        List<MomentResponseDTO> moments = CONTROLLER.getMomentsByDate(date);
 
         if (moments.isEmpty()) {
             System.out.println("No se encontraron momentos con la fecha ingresada.");
         } else {
             System.out.println("Momentos encontrados:");
-            moments.forEach(System.out::println);
+           for (MomentResponseDTO m : moments) {
+            System.out.println("Título: " + m.title());
+            System.out.println("Fecha: " + m.date());
+            System.out.println("Descripción: " + m.description());
+            System.out.println("Emoción: " + m.emotion().getDisplayName());
+
+            }
         }
 
         HomeView.printMenu();

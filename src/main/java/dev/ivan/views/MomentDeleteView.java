@@ -1,7 +1,7 @@
 package dev.ivan.views;
 
 import dev.ivan.controllers.MomentController;
-import dev.ivan.models.Moment;
+import dev.ivan.dtos.MomentResponseDTO;
 import dev.ivan.singletons.MomentControllerSingleton;
 
 import java.util.List;
@@ -12,8 +12,8 @@ public class MomentDeleteView extends View {
 
     public static void printDeleteMenu() {
 
-        List<Moment> moments = CONTROLLER.getAllMoments();
-        CONTROLLER.ShowAllMoments();
+        List<MomentResponseDTO> moments = CONTROLLER.getAllMoments();
+        // CONTROLLER.ShowAllMoments();
 
         if (moments.isEmpty()) {
             System.out.println("No hay momentos guardados.");

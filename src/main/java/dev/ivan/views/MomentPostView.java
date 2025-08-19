@@ -40,7 +40,7 @@ public class MomentPostView extends View {
         EmotionEnum emotion = EmotionEnum.values()[emotionChoice - 1];
 
         MomentDTO momentDTO = new MomentDTO(title, date, description, emotion);
-        CONTROLLER.StoreMoment(momentDTO);
+        CONTROLLER.storeMoment(momentDTO);
 
         HomeView.printMenu();
     }

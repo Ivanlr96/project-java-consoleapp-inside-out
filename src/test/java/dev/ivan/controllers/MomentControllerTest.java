@@ -1,18 +1,15 @@
 package dev.ivan.controllers;
 
 import dev.ivan.dtos.MomentDTO;
+import dev.ivan.dtos.MomentResponseDTO;
 import dev.ivan.models.EmotionEnum;
-import dev.ivan.models.Moment;
 import dev.ivan.repositories.MomentRepository;
 import dev.ivan.singletons.MomentRepositorySingleton;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.*;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 class MomentControllerTest {
 
@@ -20,61 +17,61 @@ class MomentControllerTest {
 
     @BeforeEach
     void setUp() {
-   
-        MomentRepositorySingleton.resetInstance();
+        // Limpiar la base de datos antes de cada test
+        MomentRepository repo = MomentRepositorySingleton.getInstance();
+        repo.getAllMoments().clear();
         controller = new MomentController();
     }
 
     @Test
-    void testStoreAndRetrieveMoment() {
-        LocalDate date = LocalDate.of(2025, 8, 14);
-        MomentDTO dto = new MomentDTO("Cumpleaños", date, "Mi cumpleaños", EmotionEnum.ALEGRIA);
+    void testStoreMomentAndGetAllMoments() {
+        MomentDTO dto = new MomentDTO("Título", LocalDate.of(2023, 8, 19), "Descripción", EmotionEnum.ALEGRIA);
+        controller.storeMoment(dto);
 
-        controller.StoreMoment(dto);
-
-        List<Moment> moments = controller.getAllMoments();
-        assertThat(moments, hasSize(1));
-
-        Moment stored = moments.get(0);
-        assertThat(stored.getTitle(), is("Cumpleaños"));
-        assertThat(stored.getDate(), is(date));
-        assertThat(stored.getEmotionEnum(), is(EmotionEnum.ALEGRIA));
+        List<MomentResponseDTO> moments = controller.getAllMoments();
+        assertEquals(1, moments.size());
+        assertEquals("Título", moments.get(0).title());
+        assertEquals("Descripción", moments.get(0).description());
+        assertEquals(EmotionEnum.ALEGRIA, moments.get(0).emotion());
+        assertEquals("19/08/2023", moments.get(0).date());
     }
 
     @Test
     void testDeleteMoment() {
-        LocalDate date = LocalDate.of(2025, 8, 14);
-        controller.StoreMoment(new MomentDTO("Cumpleaños", date, "Mi cumpleaños", EmotionEnum.ALEGRIA));
+        MomentDTO dto = new MomentDTO("Borrar", LocalDate.now(), "Desc", EmotionEnum.TRISTEZA);
+        controller.storeMoment(dto);
 
         boolean deleted = controller.deleteMoment(0);
-        assertThat(deleted, is(true));
-
-        assertThat(controller.getAllMoments(), is(empty()));
+        assertTrue(deleted);
+        assertEquals(0, controller.getAllMoments().size());
     }
 
     @Test
-    void testGetMomentsByEmotion() {
-        LocalDate date = LocalDate.of(2025, 8, 14);
-        controller.StoreMoment(new MomentDTO("Cumpleaños", date, "Mi cumpleaños", EmotionEnum.ALEGRIA));
-        controller.StoreMoment(new MomentDTO("Tristeza", date, "Día triste", EmotionEnum.TRISTEZA));
+    void testDeleteMomentInvalidIndex() {
+        boolean deleted = controller.deleteMoment(99);
+        assertFalse(deleted);
+    }
 
-        List<Moment> alegriaMoments = controller.getAllMoments().stream()
-                .filter(m -> m.getEmotionEnum() == EmotionEnum.ALEGRIA)
-                .toList();
+    @Test
+    void testShowMomentsByEmotion() {
+        controller.storeMoment(new MomentDTO("Feliz", LocalDate.now(), "Desc1", EmotionEnum.ALEGRIA));
+        controller.storeMoment(new MomentDTO("Triste", LocalDate.now(), "Desc2", EmotionEnum.TRISTEZA));
 
-        assertThat(alegriaMoments, hasSize(1));
-        assertThat(alegriaMoments.get(0).getEmotionEnum(), is(EmotionEnum.ALEGRIA));
+        List<MomentResponseDTO> happyMoments = controller.showMomentsByEmotion(EmotionEnum.ALEGRIA);
+        assertEquals(1, happyMoments.size());
+        assertEquals("Feliz", happyMoments.get(0).title());
+        assertEquals(EmotionEnum.ALEGRIA, happyMoments.get(0).emotion());
     }
 
     @Test
     void testGetMomentsByDate() {
-        LocalDate date1 = LocalDate.of(2025, 8, 14);
-        LocalDate date2 = LocalDate.of(2025, 8, 15);
-        controller.StoreMoment(new MomentDTO("Cumpleaños", date1, "Mi cumpleaños", EmotionEnum.ALEGRIA));
-        controller.StoreMoment(new MomentDTO("Otro día", date2, "Otra fecha", EmotionEnum.TRISTEZA));
+        LocalDate date = LocalDate.of(2025, 8, 19);
+        controller.storeMoment(new MomentDTO("Hoy", date, "Desc", EmotionEnum.ALEGRIA));
+        controller.storeMoment(new MomentDTO("Otro día", LocalDate.of(2024, 1, 1), "Desc2", EmotionEnum.ALEGRIA));
 
-        List<Moment> momentsOn14 = controller.getMomentsByDate(date1);
-        assertThat(momentsOn14, hasSize(1));
-        assertThat(momentsOn14.get(0).getDate(), is(date1));
+        List<MomentResponseDTO> moments = controller.getMomentsByDate(date);
+        assertEquals(1, moments.size());
+        assertEquals("Hoy", moments.get(0).title());
+        assertEquals("19/08/2025", moments.get(0).date());
     }
 }

@@ -2,67 +2,58 @@ package dev.ivan.controllers;
 
 import java.time.LocalDate;
 import java.util.List;
-
+import java.util.stream.Collectors;
+import dev.ivan.views.AllMomentsView;
 import dev.ivan.dtos.MomentDTO;
+import dev.ivan.dtos.MomentResponseDTO;
 import dev.ivan.mappers.MomentMapper;
-import dev.ivan.repositories.MomentRepository;
-import dev.ivan.singletons.MomentRepositorySingleton;
+import dev.ivan.mappers.MomentResponseMapper;
 import dev.ivan.models.EmotionEnum;
 import dev.ivan.models.Moment;
+import dev.ivan.repositories.MomentRepository;
+import dev.ivan.singletons.MomentRepositorySingleton;
 
 public class MomentController {
 
- private MomentRepository repository;
+    private final MomentRepository repository;
 
- public MomentController() {
-  this.repository = MomentRepositorySingleton.getInstance();
- }
-
-
-public void StoreMoment(MomentDTO MomentDTO) {
-    Moment momentToSave = MomentMapper.toEntity(MomentDTO);
-    repository.storeMoment(momentToSave);
-
-}
-
-public void ShowAllMoments() {
-    List<Moment> moments = repository.getAllMoments();
-    if (moments.isEmpty()) {
-        System.out.println("No hay momentos guardados.");
-    } else {
-        for (Moment moment : moments) {
-            System.out.println(moment);
-        }
+    public MomentController() {
+        this.repository = MomentRepositorySingleton.getInstance();
     }
-}
 
-    public List<Moment> getAllMoments() {
-    return repository.getAllMoments();
+    public void storeMoment(MomentDTO momentDTO) {
+        Moment momentToSave = MomentMapper.toEntity(momentDTO);
+        repository.storeMoment(momentToSave);
     }
+
+    public List<MomentResponseDTO> getAllMoments() {
+        return repository.getAllMoments()
+                .stream()
+                .map(MomentResponseMapper::toResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    public void showAllMoments() {
+        List<MomentResponseDTO> moments = getAllMoments();
+        AllMomentsView.printMoments(moments);
+    }
+
 
     public boolean deleteMoment(int index) {
         return repository.deleteMoment(index);
     }
 
-    public void showMomentsByEmotion(EmotionEnum emotion) {
-    List<Moment> moments = repository.getMomentsByEmotion(emotion);
-    if (moments.isEmpty()) {
-        System.out.println("No hay momentos con la emoción seleccionada.");
-    } else {
-        moments.forEach(System.out::println);
-    }
-}
-
-public void showMomentsByDate(LocalDate date) {
-    List<Moment> moments = repository.getMomentsByDate(date);
-    if (moments.isEmpty()) {
-        System.out.println("No hay momentos en la fecha seleccionada.");
-    } else {
-        moments.forEach(System.out::println);
-    }
-}
-    public List<Moment> getMomentsByDate(LocalDate date) {
-        return repository.getMomentsByDate(date);
+    public List<MomentResponseDTO> showMomentsByEmotion(EmotionEnum emotion) {
+        return repository.getMomentsByEmotion(emotion)
+                .stream()
+                .map(MomentResponseMapper::toResponseDTO)
+                .collect(Collectors.toList());
     }
 
+    public List<MomentResponseDTO> getMomentsByDate(LocalDate date) {
+        return repository.getMomentsByDate(date)
+                .stream()
+                .map(MomentResponseMapper::toResponseDTO)
+                .collect(Collectors.toList());
+    }
 }
