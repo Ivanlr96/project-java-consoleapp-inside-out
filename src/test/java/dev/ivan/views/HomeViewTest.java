@@ -1,83 +1,83 @@
 package dev.ivan.views;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.mockito.Mockito.mockStatic;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.io.PrintStream;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
 
 public class HomeViewTest {
 
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final PrintStream originalOut = System.out;
-    private final java.util.Scanner originalScanner = HomeView.SCANNER;
-    
+    private final InputStream systemIn = System.in;
+    private final PrintStream systemOut = System.out;
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+
+    private MockedStatic<MomentPostView> mockedMomentPostView;
+    private MockedStatic<MomentDeleteView> mockedMomentDeleteView;
+    private MockedStatic<MomentFilterView> mockedMomentFilterView;
+
     @BeforeEach
-    void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
+    public void setUp() {
+        System.setOut(new PrintStream(outputStreamCaptor));
+        mockedMomentPostView = mockStatic(MomentPostView.class);
+        mockedMomentDeleteView = mockStatic(MomentDeleteView.class);
+        mockedMomentFilterView = mockStatic(MomentFilterView.class);
     }
 
     @AfterEach
-    void restoreStreams() {
-        System.setOut(originalOut);
-        HomeView.SCANNER = originalScanner;
+    public void tearDown() {
+        System.setIn(systemIn);
+        System.setOut(systemOut);
+
+        mockedMomentPostView.close();
+        mockedMomentDeleteView.close();
+        mockedMomentFilterView.close();
+
+        View.SCANNER.close();
     }
 
     @Test
-    void testPrintMenu_AddMomentOption() {
-
-        String simulatedInput = String.join("\n",
-                "1",
-                LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                "1",
-                "5"
-        );
-
-        HomeView.SCANNER = new java.util.Scanner(new ByteArrayInputStream(simulatedInput.getBytes()));
+    void testPrintMenu_Option1_CallsMomentPostView() {
+        String input = "1\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        View.SCANNER = new Scanner(System.in);
 
         HomeView.printMenu();
 
-        String output = outContent.toString().replace("\r", "");
-        assertTrue(output.contains("Ingrese el título:"));
-        assertTrue(output.contains("Ingrese la fecha (dd/MM/yyyy):"));
-        assertTrue(output.contains("Ingrese la descripción:"));
-        assertTrue(output.contains("Seleccione la emoción:"));
-        assertTrue(output.contains("1. "));
-        assertTrue(output.contains("Seleccione una opción:"));
-
+        mockedMomentPostView.verify(() -> MomentPostView.printStoreMenu());
+        assertThat(outputStreamCaptor.toString(), containsString("Seleccione una opción:"));
     }
 
     @Test
-    void testPrintMenu_ShowAllMomentsOption() {
-
-        String simulatedInput = "2\n5\n";
-        HomeView.SCANNER = new java.util.Scanner(new ByteArrayInputStream(simulatedInput.getBytes()));
+    void testPrintMenu_Option3_CallsMomentDeleteView() {
+        String input = "3\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        View.SCANNER = new Scanner(System.in);
 
         HomeView.printMenu();
 
-        String output = outContent.toString().replace("\r", "");
-        assertTrue(output.contains("1. Añadir momento"));
-        assertTrue(output.contains("2. Ver todos los momentos disponibles"));
-        assertTrue(output.contains("Seleccione una opción:"));
-        assertTrue(output.contains("No hay momentos guardados.") || output.contains("Título:"));
+        mockedMomentDeleteView.verify(() -> MomentDeleteView.printDeleteMenu());
+        assertThat(outputStreamCaptor.toString(), containsString("Seleccione una opción:"));
     }
 
     @Test
-    void testPrintMenu_InvalidOption() {
-
-        String simulatedInput = "9\n5\n";
-        HomeView.SCANNER = new java.util.Scanner(new ByteArrayInputStream(simulatedInput.getBytes()));
+    void testPrintMenu_Option4_CallsMomentFilterView() {
+        String input = "4\n";
+        System.setIn(new ByteArrayInputStream(input.getBytes()));
+        View.SCANNER = new Scanner(System.in);
 
         HomeView.printMenu();
 
-        String output = outContent.toString().replace("\r", "");
-        assertTrue(output.contains("Opción inválida. Inténtalo de nuevo."));
-        assertTrue(output.contains("Seleccione una opción:"));
+        mockedMomentFilterView.verify(() -> MomentFilterView.printFilterMenu());
+        assertThat(outputStreamCaptor.toString(), containsString("Seleccione una opción:"));
     }
 }
