@@ -13,7 +13,6 @@ public class MomentDeleteView extends View {
     public static void printDeleteMenu() {
 
         List<MomentResponseDTO> moments = CONTROLLER.getAllMoments();
-        // CONTROLLER.ShowAllMoments();
 
         if (moments.isEmpty()) {
             System.out.println("No hay momentos guardados.");

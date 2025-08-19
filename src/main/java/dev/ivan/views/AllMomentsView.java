@@ -13,14 +13,16 @@ public class AllMomentsView extends View {
         }
 
         System.out.println("Momentos guardados:");
+        int index = 1;
         for (MomentResponseDTO m : moments) {
-            System.out.println("Título: " + m.title());
-            System.out.println("Fecha: " + m.date());
-            System.out.println("Descripción: " + m.description());
-            System.out.println("Emoción: " + m.emotion().getDisplayName());
-
+            System.out.println(
+                index++ + ". " +
+                "Ocurrió el: " + m.date() + ". " +
+                "Título: " + m.title() + ". " +
+                "Descripción: " + m.description()
+            );
         }
+
         HomeView.printMenu();
     }
-
 }

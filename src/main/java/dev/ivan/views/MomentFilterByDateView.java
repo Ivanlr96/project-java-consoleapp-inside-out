@@ -28,19 +28,12 @@ public class MomentFilterByDateView extends View {
             return;
         }
 
-        List<MomentResponseDTO> moments = CONTROLLER.getMomentsByDate(date);
+       List<MomentResponseDTO> moments = CONTROLLER.getMomentsByDate(date);
 
         if (moments.isEmpty()) {
             System.out.println("No se encontraron momentos con la fecha ingresada.");
         } else {
-            System.out.println("Momentos encontrados:");
-           for (MomentResponseDTO m : moments) {
-            System.out.println("Título: " + m.title());
-            System.out.println("Fecha: " + m.date());
-            System.out.println("Descripción: " + m.description());
-            System.out.println("Emoción: " + m.emotion().getDisplayName());
-
-            }
+            AllMomentsView.printMoments(moments);
         }
 
         HomeView.printMenu();

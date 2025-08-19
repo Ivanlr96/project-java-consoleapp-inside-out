@@ -31,7 +31,6 @@ public class MomenFilterByEmotionView extends View {
 
         List<MomentResponseDTO> moments = CONTROLLER.showMomentsByEmotion(selectedEmotion);
 
-
         AllMomentsView.printMoments(moments);
 
         HomeView.printMenu();
