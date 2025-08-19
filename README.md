@@ -72,3 +72,183 @@ Mi Diario es una aplicación de consola que permite a los usuarios gestionar sus
    - **Para poder:** iniciar otro
    - **Criterios de aceptación:**
      - El programa debe cerrarse de manera segura al seleccionar la opción de salida.
+
+
+## Diagrama de Clases
+
+```mermaid
+classDiagram
+    %% MODELOS
+    class Moment {
+        -String title
+        -LocalDate date
+        -String description
+        -EmotionEnum emotion
+        -LocalDateTime createdAt
+        -LocalDateTime updatedAt
+        +Moment(String, LocalDate, String, EmotionEnum)
+        +getTitle() String
+        +getDate() LocalDate
+        +getDescription() String
+        +getEmotionEnum() EmotionEnum
+        +getCreatedAt() LocalDateTime
+        +getUpdatedAt() LocalDateTime
+        +setUpdatedAt() void
+        +toString() String
+    }
+
+    class EmotionEnum {
+        <<enumeration>>
+        ALEGRIA
+        TRISTEZA
+        IRA
+        ASCO
+        MIEDO
+        ANSIEDAD
+        ENVIDIA
+        VERGUENZA
+        ABURRIMIENTO
+        NOSTALGIA
+        +getDisplayName() String
+    }
+
+    %% DTOs
+    class MomentDTO {
+        +title String
+        +date LocalDate
+        +description String
+        +emotion EmotionEnum
+    }
+
+    class MomentResponseDTO {
+        +title String
+        +date String
+        +description String
+        +emotion EmotionEnum
+    }
+
+    %% MAPPERS
+    class MomentMapper {
+        +toEntity(MomentDTO) Moment
+    }
+
+    class MomentResponseMapper {
+        +toResponseDTO(Moment) MomentResponseDTO
+    }
+
+    %% BASE DE DATOS
+    class InterfaceDatabase~T~ {
+        +store(T) void
+        +getAll() List~T~
+        +delete(int) boolean
+    }
+
+    class DiaryDatabase {
+        -List~Moment~ moments
+        +store(Moment) void
+        +getAll() List~Moment~
+        +delete(int) boolean
+    }
+
+    InterfaceDatabase <|.. DiaryDatabase
+
+    %% REPOSITORIO
+    class MomentRepository {
+        -InterfaceDatabase~Moment~ db
+        +MomentRepository()
+        +setDb(String) void
+        +storeMoment(Moment) void
+        +getAllMoments() List~Moment~
+        +deleteMoment(int) boolean
+        +getMomentsByEmotion(EmotionEnum) List~Moment~
+        +getMomentsByDate(LocalDate) List~Moment~
+    }
+
+    %% SINGLETONS
+    class MomentControllerSingleton {
+        -static MomentController instance
+        +getInstance() MomentController
+    }
+
+    class MomentRepositorySingleton {
+        -static MomentRepository INSTANCE
+        +getInstance() MomentRepository
+        +resetInstance() void
+    }
+
+    %% CONTROLADOR
+    class MomentController {
+        -MomentRepository repository
+        +MomentController()
+        +storeMoment(MomentDTO) void
+        +getAllMoments() List~MomentResponseDTO~
+        +showAllMoments() void
+        +deleteMoment(int) boolean
+        +showMomentsByEmotion(EmotionEnum) List~MomentResponseDTO~
+        +getMomentsByDate(LocalDate) List~MomentResponseDTO~
+    }
+
+    %% VISTAS
+    class View {
+        -static SCANNER Scanner
+    }
+
+    class HomeView {
+        +printMenu() void
+    }
+
+    class MomentPostView {
+        +printStoreMenu() void
+    }
+
+    class AllMomentsView {
+        +printMoments(List~MomentResponseDTO~) void
+    }
+
+    class MomentFilterView {
+        +printFilterMenu() void
+    }
+
+    class MomentFilterByDateView {
+        +printFilterMenu() void
+    }
+
+    class MomenFilterByEmotionView {
+        +printFilterMenu() void
+    }
+
+    class MomentDeleteView {
+        +printDeleteMenu() void
+    }
+
+    %% RELACIONES
+    MomentController --> MomentRepository
+    MomentController --> MomentDTO
+    MomentController --> MomentResponseDTO
+    MomentRepository --> InterfaceDatabase
+    MomentRepository --> DiaryDatabase
+    DiaryDatabase --> Moment
+    MomentMapper --> Moment
+    MomentMapper --> MomentDTO
+    MomentResponseMapper --> Moment
+    MomentResponseMapper --> MomentResponseDTO
+    HomeView --> MomentController
+    MomentPostView --> MomentController
+    AllMomentsView --> MomentResponseDTO
+    MomentFilterView --> MomenFilterByEmotionView
+    MomentFilterView --> MomentFilterByDateView
+    MomentFilterByDateView --> MomentController
+    MomenFilterByEmotionView --> MomentController
+    MomentDeleteView --> MomentController
+    View <|-- HomeView
+    View <|-- MomentPostView
+    View <|-- AllMomentsView
+    View <|-- MomentFilterView
+    View <|-- MomentFilterByDateView
+    View <|-- MomenFilterByEmotionView
+    View <|-- MomentDeleteView
+
+```
+
+## Tests
+![Tests](image.png)
