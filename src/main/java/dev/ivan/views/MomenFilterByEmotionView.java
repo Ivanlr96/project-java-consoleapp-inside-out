@@ -1,12 +1,15 @@
 package dev.ivan.views;
 
+import java.util.List;
+
 import dev.ivan.controllers.MomentController;
+import dev.ivan.dtos.MomentResponseDTO;
 import dev.ivan.models.EmotionEnum;
 import dev.ivan.singletons.MomentControllerSingleton;
 
 public class MomenFilterByEmotionView extends View {
 
-    private static MomentController CONTROLLER = MomentControllerSingleton.getInstance();
+    private static final MomentController CONTROLLER = MomentControllerSingleton.getInstance();
 
     public static void printFilterMenu() {
         System.out.println("Seleccione la emoción para filtrar:");
@@ -25,7 +28,11 @@ public class MomenFilterByEmotionView extends View {
 
         EmotionEnum selectedEmotion = EmotionEnum.values()[choice - 1];
 
-        CONTROLLER.showMomentsByEmotion(selectedEmotion);
+
+        List<MomentResponseDTO> moments = CONTROLLER.showMomentsByEmotion(selectedEmotion);
+
+
+        AllMomentsView.printMoments(moments);
 
         HomeView.printMenu();
     }
