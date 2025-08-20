@@ -10,6 +10,7 @@ import dev.ivan.mappers.MomentMapper;
 import dev.ivan.mappers.MomentResponseMapper;
 import dev.ivan.models.EmotionEnum;
 import dev.ivan.models.Moment;
+import dev.ivan.models.MomentTypeEnum;
 import dev.ivan.repositories.MomentRepository;
 import dev.ivan.singletons.MomentRepositorySingleton;
 
@@ -52,6 +53,13 @@ public class MomentController {
 
     public List<MomentResponseDTO> getMomentsByDate(LocalDate date) {
         return repository.getMomentsByDate(date)
+                .stream()
+                .map(MomentResponseMapper::toResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+     public List<MomentResponseDTO> showMomentsByType(MomentTypeEnum type) {
+        return repository.getMomentsByType(type)
                 .stream()
                 .map(MomentResponseMapper::toResponseDTO)
                 .collect(Collectors.toList());

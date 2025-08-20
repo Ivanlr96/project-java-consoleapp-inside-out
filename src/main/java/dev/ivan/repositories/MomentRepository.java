@@ -3,6 +3,7 @@ package dev.ivan.repositories;
 import dev.ivan.contracts.InterfaceDatabase;
 import dev.ivan.db.DiaryDatabase;
 import dev.ivan.models.Moment;
+import dev.ivan.models.MomentTypeEnum;
 import dev.ivan.models.EmotionEnum;
 
 import java.time.LocalDate;
@@ -13,11 +14,9 @@ public class MomentRepository {
 
     private InterfaceDatabase<Moment> db;
 
-    
     public MomentRepository() {
-        this.db = new DiaryDatabase(); 
+        this.db = new DiaryDatabase();
     }
-
 
     public void setDb(String dbType) {
         if (dbType.equalsIgnoreCase("diary")) {
@@ -26,17 +25,14 @@ public class MomentRepository {
 
     }
 
-
     public void storeMoment(Moment moment) {
         db.store(moment);
     }
-
 
     public List<Moment> getAllMoments() {
         return db.getAll();
     }
 
-    
     public boolean deleteMoment(int index) {
         return db.delete(index);
     }
@@ -55,5 +51,11 @@ public class MomentRepository {
             }
         }
         return filtered;
+    }
+
+    public List<Moment> getMomentsByType(MomentTypeEnum type) {
+        return db.getAll().stream()
+                .filter(m -> m.getType() == type)
+                .toList();
     }
 }

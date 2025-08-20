@@ -23,14 +23,14 @@ public class MomentFilterViewTest {
 
     private MockedStatic<MomenFilterByEmotionView> mockedFilterByEmotionView;
     private MockedStatic<MomentFilterByDateView> mockedFilterByDateView;
-    private MockedStatic<HomeView> mockedHomeView;
+    private MockedStatic<MomentFilterByTypeView> mockedFilterByTypeView;
 
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
         mockedFilterByEmotionView = mockStatic(MomenFilterByEmotionView.class);
         mockedFilterByDateView = mockStatic(MomentFilterByDateView.class);
-        mockedHomeView = mockStatic(HomeView.class);
+        mockedFilterByTypeView = mockStatic(MomentFilterByTypeView.class);
     }
 
     @AfterEach
@@ -40,7 +40,7 @@ public class MomentFilterViewTest {
 
         mockedFilterByEmotionView.close();
         mockedFilterByDateView.close();
-        mockedHomeView.close();
+        mockedFilterByTypeView.close();
 
 
         View.SCANNER.close();
@@ -70,27 +70,28 @@ public class MomentFilterViewTest {
         assertThat(outputStreamCaptor.toString(), containsString("Filtrar por ...:"));
     }
 
-    @Test
-    void testPrintFilterMenu_Option3_CallsHomeView() {
+     @Test
+    void testPrintFilterMenu_Option3_CallsTypeView() {
         String input = "3\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         View.SCANNER = new Scanner(System.in);
 
         MomentFilterView.printFilterMenu();
 
-        mockedHomeView.verify(() -> HomeView.printMenu());
+        mockedFilterByTypeView.verify(() -> MomentFilterByTypeView.printFilterMenu());
         assertThat(outputStreamCaptor.toString(), containsString("Filtrar por ...:"));
     }
 
     @Test
     void testPrintFilterMenu_InvalidOption_ShowsErrorAndRetries() {
-        String input = "9\n3\n";
+
+        String input = "99\n1\n";
         System.setIn(new ByteArrayInputStream(input.getBytes()));
         View.SCANNER = new Scanner(System.in);
 
         MomentFilterView.printFilterMenu();
 
         assertThat(outputStreamCaptor.toString(), containsString("Opción inválida. Intentelo de nuevo."));
-        mockedHomeView.verify(() -> HomeView.printMenu());
+        mockedFilterByEmotionView.verify(() -> MomenFilterByEmotionView.printFilterMenu());
     }
 }

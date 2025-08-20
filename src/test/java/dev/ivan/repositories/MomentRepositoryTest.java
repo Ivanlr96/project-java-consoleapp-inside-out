@@ -58,4 +58,25 @@ class MomentRepositoryTest<repository> {
         assertEquals(1, yesterdayMoments.size());
         assertEquals(m2, yesterdayMoments.get(0));
     }
+
+    @Test
+void testGetMomentsByType() {
+    Moment m1 = new Moment("A", LocalDate.now(), "Desc", EmotionEnum.ALEGRIA, MomentTypeEnum.Bueno);
+    Moment m2 = new Moment("B", LocalDate.now(), "Desc", EmotionEnum.TRISTEZA, MomentTypeEnum.Malo);
+    Moment m3 = new Moment("C", LocalDate.now(), "Desc", EmotionEnum.ALEGRIA, MomentTypeEnum.Bueno);
+
+    repository.storeMoment(m1);
+    repository.storeMoment(m2);
+    repository.storeMoment(m3);
+
+    List<Moment> goodMoments = repository.getMomentsByType(MomentTypeEnum.Bueno);
+    assertEquals(2, goodMoments.size());
+    assertTrue(goodMoments.contains(m1));
+    assertTrue(goodMoments.contains(m3));
+
+    List<Moment> badMoments = repository.getMomentsByType(MomentTypeEnum.Malo);
+    assertEquals(1, badMoments.size());
+    assertEquals(m2, badMoments.get(0));
+}
+
 }
