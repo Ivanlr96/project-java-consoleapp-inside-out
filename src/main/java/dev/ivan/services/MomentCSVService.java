@@ -4,12 +4,13 @@ import com.opencsv.CSVWriter;
 import dev.ivan.models.Moment;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public class MomentCSVService {
-
 
     public boolean exportMomentsToCSV(List<Moment> moments, String path) {
         try {
@@ -17,19 +18,37 @@ public class MomentCSVService {
             String defaultPath = projectDir + "/data/momentos.csv";
             File file = new File(path != null ? path : defaultPath);
 
-            file.getParentFile().mkdirs();
+            if (file.getParentFile() != null) {
+                file.getParentFile().mkdirs();
+            }
 
-            try (CSVWriter writer = new CSVWriter(new FileWriter(file))) {
+            try (
+                OutputStreamWriter osw = new OutputStreamWriter(
+                        new FileOutputStream(file),
+                        StandardCharsets.UTF_8
+                );
+                CSVWriter writer = new CSVWriter(
+                        osw,
+                        ';',
+                        CSVWriter.DEFAULT_QUOTE_CHARACTER,
+                        CSVWriter.DEFAULT_ESCAPE_CHARACTER,
+                        CSVWriter.DEFAULT_LINE_END
+                )
+            ) {
+
+                osw.write('\uFEFF');
+
 
                 writer.writeNext(new String[] { "Título", "Descripción", "Fecha", "Emoción", "Tipo" });
 
+
                 for (Moment m : moments) {
                     writer.writeNext(new String[] {
-                        m.getTitle(),
-                        m.getDescription(),
-                        m.getDate().toString(),
-                        m.getEmotionEnum().getDisplayName(),
-                        m.getType().name()
+                        m.getTitle() != null ? m.getTitle() : "",
+                        m.getDescription() != null ? m.getDescription() : "",
+                        m.getDate() != null ? m.getDate().toString() : "",
+                        m.getEmotionEnum() != null ? m.getEmotionEnum().getDisplayName() : "",
+                        m.getType() != null ? m.getType().name() : ""
                     });
                 }
             }
