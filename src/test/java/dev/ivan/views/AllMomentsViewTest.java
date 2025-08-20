@@ -2,9 +2,9 @@ package dev.ivan.views;
 
 import dev.ivan.dtos.MomentResponseDTO;
 import dev.ivan.models.EmotionEnum;
+import dev.ivan.models.MomentTypeEnum;
 import org.junit.jupiter.api.*;
 import org.mockito.MockedStatic;
-
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -42,7 +42,7 @@ class AllMomentsViewTest {
     //     String output = outputStreamCaptor.toString();
     //     assertThat(output, containsString("No hay momentos guardados."));
 
-    //     // Verifica que después llama al menú principal
+    //
     //     mockedHomeView.verify(() -> HomeView.printMenu());
     // }
 
@@ -52,7 +52,8 @@ class AllMomentsViewTest {
                 "Mi título",
                 "12/05/2020",
                 "Una descripción",
-                EmotionEnum.ALEGRIA
+                EmotionEnum.ALEGRIA,
+                MomentTypeEnum.Bueno
         );
 
         AllMomentsView.printMoments(List.of(moment));
@@ -63,7 +64,6 @@ class AllMomentsViewTest {
         assertThat(output, containsString("Título: Mi título"));
         assertThat(output, containsString("Descripción: Una descripción"));
 
-        // Verifica que también vuelve al menú
         mockedHomeView.verify(() -> HomeView.printMenu());
     }
 }

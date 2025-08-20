@@ -1,6 +1,7 @@
 package dev.ivan.repositories;
 import dev.ivan.models.EmotionEnum;
 import dev.ivan.models.Moment;
+import dev.ivan.models.MomentTypeEnum;
 import dev.ivan.repositories.MomentRepository;
 import org.junit.jupiter.api.*;
 import java.time.LocalDate;
@@ -14,7 +15,7 @@ class MomentRepositoryTest<repository> {
     }
     @Test
     void testStoreAndGetAllMoments() {
-        Moment moment = new Moment("Título", LocalDate.now(), "Descripción", EmotionEnum.ALEGRIA);
+        Moment moment = new Moment("Título", LocalDate.now(), "Descripción", EmotionEnum.ALEGRIA, MomentTypeEnum.Bueno);
         repository.storeMoment(moment);
         List<Moment> allMoments = repository.getAllMoments();
         assertEquals(1, allMoments.size());
@@ -22,7 +23,7 @@ class MomentRepositoryTest<repository> {
     }
     @Test
     void testDeleteMoment() {
-        Moment moment = new Moment("Título", LocalDate.now(), "Descripción", EmotionEnum.ALEGRIA);
+        Moment moment = new Moment("Título", LocalDate.now(), "Descripción", EmotionEnum.ALEGRIA, MomentTypeEnum.Bueno);
         repository.storeMoment(moment);
         boolean deleted = repository.deleteMoment(0);
         assertTrue(deleted);
@@ -31,8 +32,8 @@ class MomentRepositoryTest<repository> {
     }
     @Test
     void testGetMomentsByEmotion() {
-        Moment m1 = new Moment("A", LocalDate.now(), "Desc", EmotionEnum.ALEGRIA);
-        Moment m2 = new Moment("B", LocalDate.now(), "Desc", EmotionEnum.TRISTEZA);
+        Moment m1 = new Moment("A", LocalDate.now(), "Desc", EmotionEnum.ALEGRIA, MomentTypeEnum.Bueno);
+        Moment m2 = new Moment("B", LocalDate.now(), "Desc", EmotionEnum.TRISTEZA, MomentTypeEnum.Malo);
         repository.storeMoment(m1);
         repository.storeMoment(m2);
         List<Moment> happyMoments = repository.getMomentsByEmotion(EmotionEnum.ALEGRIA);
@@ -46,8 +47,8 @@ class MomentRepositoryTest<repository> {
     void testGetMomentsByDate() {
         LocalDate today = LocalDate.now();
         LocalDate yesterday = today.minusDays(1);
-        Moment m1 = new Moment("A", today, "Desc", EmotionEnum.ALEGRIA);
-        Moment m2 = new Moment("B", yesterday, "Desc", EmotionEnum.TRISTEZA);
+        Moment m1 = new Moment("A", today, "Desc", EmotionEnum.ALEGRIA, MomentTypeEnum.Bueno);
+        Moment m2 = new Moment("B", yesterday, "Desc", EmotionEnum.TRISTEZA, MomentTypeEnum.Malo);
         repository.storeMoment(m1);
         repository.storeMoment(m2);
         List<Moment> todayMoments = repository.getMomentsByDate(today);

@@ -3,7 +3,7 @@ package dev.ivan.views;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
-
+import dev.ivan.models.MomentTypeEnum;
 import dev.ivan.controllers.MomentController;
 import dev.ivan.dtos.MomentDTO;
 import dev.ivan.views.HomeView;
@@ -12,12 +12,12 @@ import dev.ivan.singletons.MomentControllerSingleton;
 
 public class MomentPostView extends View {
 
-  private static MomentController CONTROLLER = MomentControllerSingleton.getInstance();
+    private static MomentController CONTROLLER = MomentControllerSingleton.getInstance();
 
     public static void printStoreMenu() {
         System.out.println("Ingrese el título:");
         String title = SCANNER.next();
-             LocalDate date = null;
+        LocalDate date = null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         while (date == null) {
             System.out.println("Ingrese la fecha (dd/MM/yyyy):");
@@ -39,7 +39,14 @@ public class MomentPostView extends View {
         int emotionChoice = SCANNER.nextInt();
         EmotionEnum emotion = EmotionEnum.values()[emotionChoice - 1];
 
-        MomentDTO momentDTO = new MomentDTO(title, date, description, emotion);
+        System.out.println("Seleccione si el momento fue bueno o malo:");
+        System.out.println("1. Bueno");
+        System.out.println("2. Malo");
+
+        int typeChoice = SCANNER.nextInt();
+        MomentTypeEnum type = (typeChoice == 1) ? MomentTypeEnum.Bueno : MomentTypeEnum.Malo;
+
+        MomentDTO momentDTO = new MomentDTO(title, date, description, emotion, type);
         CONTROLLER.storeMoment(momentDTO);
         System.out.println("Momento vivido añadido correctamente.");
 

@@ -14,7 +14,8 @@ public class MomentResponseMapper {
                 moment.getTitle(),
                 moment.getDate().format(formatter),
                 moment.getDescription(),
-                moment.getEmotionEnum()
+                moment.getEmotionEnum(),
+                moment.getType()
         );
     }
 }

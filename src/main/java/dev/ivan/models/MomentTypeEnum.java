@@ -1,8 +1,8 @@
 package dev.ivan.models;
 
 public enum MomentTypeEnum {
-BUENO("Bueno"),
-MALO("Malo");
+Bueno("Bueno"),
+Malo("Malo");
 
 private final String displayName;
 

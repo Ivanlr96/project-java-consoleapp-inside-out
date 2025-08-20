@@ -10,23 +10,27 @@ public class Moment {
     private LocalDate date;
     private String description;
     private EmotionEnum emotion;
+    private MomentTypeEnum type;
     private final LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public Moment(String title, LocalDate date, String description, EmotionEnum emotion) {
+
+    public Moment(String title, LocalDate date, String description, EmotionEnum emotion, MomentTypeEnum type) {
         this.title = title;
         this.date = date;
         this.description = description;
         this.emotion = emotion;
-        this.createdAt = LocalDateTime.now(); 
-        this.updatedAt = createdAt;          
+        this.type = type;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = createdAt;
     }
 
- 
+
     public String getTitle() { return title; }
     public LocalDate getDate() { return date; }
     public String getDescription() { return description; }
     public EmotionEnum getEmotionEnum() { return emotion; }
+    public MomentTypeEnum getType() { return type; };
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
 

@@ -19,7 +19,8 @@ public class AllMomentsView extends View {
                 index++ + ". " +
                 "Ocurrió el: " + m.date() + ". " +
                 "Título: " + m.title() + ". " +
-                "Descripción: " + m.description()
+                "Descripción: " + m.description() + ". " +
+                "Tipo: " + m.type()
             );
         }
 

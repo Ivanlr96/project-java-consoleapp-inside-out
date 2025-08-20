@@ -61,7 +61,9 @@ void setUp() throws Exception {
                 "MiTitulo",
                 "12/05/2020",
                 "MiDescripcion",
+                "1",
                 "1"
+
         ) + "\n";
 
         System.setIn(new ByteArrayInputStream(input.getBytes()));
@@ -75,6 +77,8 @@ void setUp() throws Exception {
         assertThat(output, containsString("Ingrese la fecha (dd/MM/yyyy):"));
         assertThat(output, containsString("Ingrese la descripción:"));
         assertThat(output, containsString("Seleccione la emoción:"));
+        assertThat(output, containsString("Seleccione si el momento fue bueno o malo:"));
+
 
 
         verify(mockController, times(1)).storeMoment(any(MomentDTO.class));

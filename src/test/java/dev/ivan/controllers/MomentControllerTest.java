@@ -3,6 +3,7 @@ package dev.ivan.controllers;
 import dev.ivan.dtos.MomentDTO;
 import dev.ivan.dtos.MomentResponseDTO;
 import dev.ivan.models.EmotionEnum;
+import dev.ivan.models.MomentTypeEnum;
 import dev.ivan.repositories.MomentRepository;
 import dev.ivan.singletons.MomentRepositorySingleton;
 import org.junit.jupiter.api.*;
@@ -17,7 +18,6 @@ class MomentControllerTest {
 
     @BeforeEach
     void setUp() {
-        // Limpiar la base de datos antes de cada test
         MomentRepository repo = MomentRepositorySingleton.getInstance();
         repo.getAllMoments().clear();
         controller = new MomentController();
@@ -25,7 +25,7 @@ class MomentControllerTest {
 
     @Test
     void testStoreMomentAndGetAllMoments() {
-        MomentDTO dto = new MomentDTO("Título", LocalDate.of(2023, 8, 19), "Descripción", EmotionEnum.ALEGRIA);
+        MomentDTO dto = new MomentDTO("Título", LocalDate.of(2023, 8, 19), "Descripción", EmotionEnum.ALEGRIA, MomentTypeEnum.Bueno);
         controller.storeMoment(dto);
 
         List<MomentResponseDTO> moments = controller.getAllMoments();
@@ -33,12 +33,13 @@ class MomentControllerTest {
         assertEquals("Título", moments.get(0).title());
         assertEquals("Descripción", moments.get(0).description());
         assertEquals(EmotionEnum.ALEGRIA, moments.get(0).emotion());
+        assertEquals(MomentTypeEnum.Bueno, moments.get(0).type());
         assertEquals("19/08/2023", moments.get(0).date());
     }
 
     @Test
     void testDeleteMoment() {
-        MomentDTO dto = new MomentDTO("Borrar", LocalDate.now(), "Desc", EmotionEnum.TRISTEZA);
+        MomentDTO dto = new MomentDTO("Borrar", LocalDate.now(), "Desc", EmotionEnum.TRISTEZA, MomentTypeEnum.Malo);
         controller.storeMoment(dto);
 
         boolean deleted = controller.deleteMoment(0);
@@ -54,8 +55,8 @@ class MomentControllerTest {
 
     @Test
     void testShowMomentsByEmotion() {
-        controller.storeMoment(new MomentDTO("Feliz", LocalDate.now(), "Desc1", EmotionEnum.ALEGRIA));
-        controller.storeMoment(new MomentDTO("Triste", LocalDate.now(), "Desc2", EmotionEnum.TRISTEZA));
+        controller.storeMoment(new MomentDTO("Feliz", LocalDate.now(), "Desc1", EmotionEnum.ALEGRIA, MomentTypeEnum.Bueno));
+        controller.storeMoment(new MomentDTO("Triste", LocalDate.now(), "Desc2", EmotionEnum.TRISTEZA, MomentTypeEnum.Malo));
 
         List<MomentResponseDTO> happyMoments = controller.showMomentsByEmotion(EmotionEnum.ALEGRIA);
         assertEquals(1, happyMoments.size());
@@ -66,8 +67,8 @@ class MomentControllerTest {
     @Test
     void testGetMomentsByDate() {
         LocalDate date = LocalDate.of(2025, 8, 19);
-        controller.storeMoment(new MomentDTO("Hoy", date, "Desc", EmotionEnum.ALEGRIA));
-        controller.storeMoment(new MomentDTO("Otro día", LocalDate.of(2024, 1, 1), "Desc2", EmotionEnum.ALEGRIA));
+        controller.storeMoment(new MomentDTO("Hoy", date, "Desc", EmotionEnum.ALEGRIA, MomentTypeEnum.Bueno));
+        controller.storeMoment(new MomentDTO("Otro día", LocalDate.of(2024, 1, 1), "Desc2", EmotionEnum.ALEGRIA, MomentTypeEnum.Malo));
 
         List<MomentResponseDTO> moments = controller.getMomentsByDate(date);
         assertEquals(1, moments.size());

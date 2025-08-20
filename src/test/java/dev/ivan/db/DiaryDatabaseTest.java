@@ -2,6 +2,8 @@ package dev.ivan.db;
 
 import dev.ivan.models.EmotionEnum;
 import dev.ivan.models.Moment;
+import dev.ivan.models.MomentTypeEnum;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +24,7 @@ class DiaryDatabaseTest {
 
     @Test
     void testStoreAndGetAll() {
-        Moment moment = new Moment("Cumpleaños", LocalDate.of(2025, 8, 14), "Mi cumpleaños", EmotionEnum.ALEGRIA);
+        Moment moment = new Moment("Cumpleaños", LocalDate.of(2025, 8, 14), "Mi cumpleaños", EmotionEnum.ALEGRIA, MomentTypeEnum.Bueno);
         db.store(moment);
 
         List<Moment> moments = db.getAll();
@@ -35,7 +37,7 @@ class DiaryDatabaseTest {
 
     @Test
     void testDeleteValidIndex() {
-        Moment moment = new Moment("Cumpleaños", LocalDate.of(2025, 8, 14), "Mi cumpleaños", EmotionEnum.ALEGRIA);
+        Moment moment = new Moment("Cumpleaños", LocalDate.of(2025, 8, 14), "Mi cumpleaños", EmotionEnum.ALEGRIA, MomentTypeEnum.Bueno);
         db.store(moment);
 
         boolean deleted = db.delete(0);

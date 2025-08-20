@@ -8,7 +8,7 @@ class MomentTest {
     @Test
     void testMomentGetters() {
         LocalDate date = LocalDate.of(2025, 8, 14);
-        Moment moment = new Moment("Título prueba", date, "Descripción prueba", EmotionEnum.ALEGRIA);
+        Moment moment = new Moment("Título prueba", date, "Descripción prueba", EmotionEnum.ALEGRIA, MomentTypeEnum.Bueno);
         assertEquals("Título prueba", moment.getTitle());
         assertEquals(date, moment.getDate());
         assertEquals("Descripción prueba", moment.getDescription());
@@ -18,7 +18,7 @@ class MomentTest {
     }
     @Test
     void testSetUpdatedAt() throws InterruptedException {
-        Moment moment = new Moment("Título", LocalDate.now(), "Descripción", EmotionEnum.ALEGRIA);
+        Moment moment = new Moment("Título", LocalDate.now(), "Descripción", EmotionEnum.ALEGRIA, MomentTypeEnum.Bueno);
         LocalDateTime firstUpdatedAt = moment.getUpdatedAt();
         Thread.sleep(10);
         moment.setUpdatedAt();
@@ -27,7 +27,7 @@ class MomentTest {
     @Test
     void testToStringContainsAllFields() {
         LocalDate date = LocalDate.of(2025, 8, 14);
-        Moment moment = new Moment("Título prueba", date, "Descripción prueba", EmotionEnum.ALEGRIA);
+        Moment moment = new Moment("Título prueba", date, "Descripción prueba", EmotionEnum.ALEGRIA, MomentTypeEnum.Bueno);
         String str = moment.toString();
         assertTrue(str.contains("Título: Título prueba"));
         assertTrue(str.contains("Fecha: 14/08/2025"));
