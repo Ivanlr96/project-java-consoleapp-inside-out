@@ -75,4 +75,23 @@ class MomentControllerTest {
         assertEquals("Hoy", moments.get(0).title());
         assertEquals("19/08/2025", moments.get(0).date());
     }
+
+    @Test
+    void testShowMomentsByType() {
+
+    controller.storeMoment(new MomentDTO("Momento bueno 1", LocalDate.now(), "Desc1", EmotionEnum.ALEGRIA, MomentTypeEnum.Bueno));
+    controller.storeMoment(new MomentDTO("Momento malo 1", LocalDate.now(), "Desc2", EmotionEnum.TRISTEZA, MomentTypeEnum.Malo));
+    controller.storeMoment(new MomentDTO("Momento bueno 2", LocalDate.now(), "Desc3", EmotionEnum.MIEDO, MomentTypeEnum.Bueno));
+
+    List<MomentResponseDTO> buenos = controller.showMomentsByType(MomentTypeEnum.Bueno);
+    assertEquals(2, buenos.size());
+    assertTrue(buenos.stream().anyMatch(m -> m.title().equals("Momento bueno 1")));
+    assertTrue(buenos.stream().anyMatch(m -> m.title().equals("Momento bueno 2")));
+
+
+    List<MomentResponseDTO> malos = controller.showMomentsByType(MomentTypeEnum.Malo);
+    assertEquals(1, malos.size());
+    assertEquals("Momento malo 1", malos.get(0).title());
+}
+
 }
