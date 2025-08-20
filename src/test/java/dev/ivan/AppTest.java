@@ -15,7 +15,7 @@ public class AppTest {
         Process process = pb.start();
 
         try (OutputStream os = process.getOutputStream()) {
-            os.write("5\n".getBytes());
+            os.write("6\n".getBytes());
             os.flush();
         }
 

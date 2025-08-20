@@ -6,28 +6,7 @@ import dev.ivan.singletons.MomentControllerSingleton;
 public class HomeView extends View {
 
     public static final MomentController momentController = MomentControllerSingleton.getInstance();
-    public static void printExportMenu() {
-    System.out.println("¿Desea exportar todos los momentos a CSV?");
-    System.out.println("1. Sí");
-    System.out.println("2. No");
 
-    int choice = SCANNER.nextInt();
-    switch (choice) {
-        case 1:
-            boolean success = momentController.exportMomentsToCSV();
-            if (success) {
-                System.out.println("Momento(s) exportado(s) correctamente.");
-            } else {
-                System.out.println("Error al exportar los momentos.");
-            }
-            break;
-        case 2:
-            System.out.println("Operación cancelada.");
-            break;
-        default:
-            System.out.println("Opción inválida.");
-    }
-}
 
     public static void printMenu() {
 
@@ -60,7 +39,7 @@ public class HomeView extends View {
         MomentFilterView.printFilterMenu();
         }
         if (option == 5) {
-        printExportMenu();
+        MomentCSVStoreView.printExportMenu();
         }
 
         if (option == 6) {
