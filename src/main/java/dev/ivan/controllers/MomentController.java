@@ -13,10 +13,12 @@ import dev.ivan.models.Moment;
 import dev.ivan.models.MomentTypeEnum;
 import dev.ivan.repositories.MomentRepository;
 import dev.ivan.singletons.MomentRepositorySingleton;
+import dev.ivan.services.MomentCSVService;
 
 public class MomentController {
 
     private final MomentRepository repository;
+      private final MomentCSVService csvService = new MomentCSVService();
 
     public MomentController() {
         this.repository = MomentRepositorySingleton.getInstance();
@@ -63,5 +65,10 @@ public class MomentController {
                 .stream()
                 .map(MomentResponseMapper::toResponseDTO)
                 .collect(Collectors.toList());
+    }
+
+        public boolean exportMomentsToCSV() {
+        List<Moment> allMoments = MomentRepositorySingleton.getInstance().getAllMoments();
+        return csvService.exportMomentsToCSV(allMoments, null);
     }
 }
