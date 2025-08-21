@@ -71,16 +71,26 @@ public class Movie {
         this.createdAt = createdAt;
     }
 
+    public String[] toCSV() {
+        return new String[]{
+                imdbId,
+                title,
+                String.join(",", genres),
+                emotion.getDisplayName(),
+                releaseYear.toString(),
+                createdAt.toString()
+        };
+    }
+
     @Override
     public String toString() {
-        return "Movie{" +
-                "imdbId='" + imdbId + '\'' +
-                ", title='" + title + '\'' +
-                ", genres=" + genres +
-                ", emotion=" + (emotion != null ? emotion.getDisplayName() : "N/A") +
-                ", releaseYear=" + releaseYear +
-                ", createdAt=" + createdAt +
-                '}';
+        return "Movie{"
+                + "imdbId='" + imdbId + "'"
+                + ", title='" + title + "'"
+                + ", genres=" + genres
+                + ", emotion=" + (emotion != null ? emotion.getDisplayName() : "N/A")
+                + ", releaseYear=" + releaseYear
+                + ", createdAt=" + createdAt
+                + "}";
     }
 }
-

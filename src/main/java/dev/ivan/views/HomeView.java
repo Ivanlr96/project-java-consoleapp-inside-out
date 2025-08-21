@@ -1,12 +1,12 @@
 package dev.ivan.views;
 
+import dev.ivan.controllers.MovieController;
 import dev.ivan.controllers.MomentController;
 import dev.ivan.singletons.MomentControllerSingleton;
 
 public class HomeView extends View {
 
     public static final MomentController momentController = MomentControllerSingleton.getInstance();
-
 
     public static void printMenu() {
 
@@ -17,7 +17,8 @@ public class HomeView extends View {
                 3. Eliminar un momento
                 4. Filtrar los momentos
                 5. Exportar a CSV
-                6. Salir
+                6. Añadir película
+                7. Salir
                 Seleccione una opción:
                 """;
 
@@ -29,28 +30,28 @@ public class HomeView extends View {
             MomentPostView.printStoreMenu();
         }
         if (option == 2) {
-        momentController.showAllMoments();
+            momentController.showAllMoments();
         }
         if (option == 3) {
-        MomentDeleteView.printDeleteMenu();
+            MomentDeleteView.printDeleteMenu();
         }
-
         if (option == 4) {
-        MomentFilterView.printFilterMenu();
+            MomentFilterView.printFilterMenu();
         }
         if (option == 5) {
-        MomentCSVStoreView.printExportMenu();
+            MomentCSVStoreView.printExportMenu();
         }
-
         if (option == 6) {
+            new MovieController().addMovie();
+        }
+        if (option == 7) {
             System.out.println("¡Hasta la proxima!");
             System.exit(0);
         }
 
-       if (option < 1 || option > 6) {
+        if (option < 1 || option > 7) {
             System.out.println("Opción inválida. Inténtalo de nuevo.");
             printMenu();
         }
     }
-
 }
