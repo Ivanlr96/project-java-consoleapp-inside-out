@@ -30,10 +30,12 @@ public class MovieController {
         EmotionEnum emotion = EmotionEnum.valueOf(movieData[1]);
 
         Movie movie = movieService.getMovie(imdbId, emotion);
-        movieCSVRepository.save(movie);
-
-        System.out.println("Pelicula añadida con éxito:");
-        System.out.println(movie);
+        if (movie != null) {
+            movieCSVRepository.save(movie);
+            moviePostView.printSuccess(movie);
+        } else {
+            moviePostView.printError();
+        }
     }
 
     public void showAllMovies() {
@@ -44,7 +46,7 @@ public class MovieController {
     public void deleteMovie() {
         List<Movie> movies = movieCSVRepository.findAll();
         if (movies.isEmpty()) {
-            System.out.println("No hay películas para eliminar.");
+            movieDeleteView.printNoMoviesToDelete();
             return;
         }
         AllMoviesView.display(movies);
@@ -53,9 +55,9 @@ public class MovieController {
         if (index > 0 && index <= movies.size()) {
             Movie movieToDelete = movies.get(index - 1);
             movieCSVRepository.delete(movieToDelete.getImdbId());
-            System.out.println("Pelicula eliminada con éxito.");
+            movieDeleteView.printSuccess();
         } else {
-            System.out.println("Índice inválido.");
+            movieDeleteView.printInvalidIndex();
         }
     }
 }

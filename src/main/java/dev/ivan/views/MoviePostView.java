@@ -1,6 +1,7 @@
 package dev.ivan.views;
 
 import dev.ivan.models.moment.EmotionEnum;
+import dev.ivan.models.movie.Movie;
 
 import java.util.Scanner;
 
@@ -9,8 +10,8 @@ public class MoviePostView {
     public String[] display() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Añadir una película: ");
-        System.out.print("Introduzca la IMDB ID: ");
+        System.out.println("--- Añadir Película ---");
+        System.out.print("Introduzca la IMDBID: ");
         String imdbId = scanner.nextLine();
 
         System.out.println("Seleccione una emoción:");
@@ -20,16 +21,25 @@ public class MoviePostView {
 
         int choice = -1;
         while (choice < 1 || choice > EmotionEnum.values().length) {
-            System.out.print("Número de la emoción: ");
+            System.out.print("Introduzca el número de la emoción: ");
             try {
                 choice = Integer.parseInt(scanner.nextLine());
             } catch (NumberFormatException e) {
-                System.out.println("Opción no válida, introduzca un número válido.");
+                System.out.println("Opción inválida. Por favor, introduzca un número.");
             }
         }
 
         EmotionEnum selectedEmotion = EmotionEnum.values()[choice - 1];
 
         return new String[]{imdbId, selectedEmotion.name()};
+    }
+
+    public void printSuccess(Movie movie) {
+        System.out.println("Pelicula añadida con éxito:");
+        System.out.println(movie);
+    }
+
+    public void printError() {
+        System.out.println("Error al añadir la película.");
     }
 }
