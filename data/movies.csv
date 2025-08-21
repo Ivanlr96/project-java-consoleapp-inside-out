@@ -1,2 +1,1 @@
-ImdbId;Titulo;Genero;Emocion;Fecha de estreno;Fecha de creacion
-tt0118583;Alien: Resurrection;Action,Horror,Sci-Fi;ALEGRIA;1997-11-26;2025-08-21T18:12:29.496158200
+imdbId;title;genres;emotion;releaseYear;createdAt
