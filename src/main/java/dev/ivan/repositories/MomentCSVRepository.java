@@ -1,4 +1,4 @@
-package dev.ivan.services;
+package dev.ivan.repositories;
 
 import com.opencsv.CSVWriter;
 import dev.ivan.models.Moment;
@@ -10,7 +10,7 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-public class MomentCSVService {
+public class MomentCSVRepository {
 
     public boolean exportMomentsToCSV(List<Moment> moments, String path) {
         try {

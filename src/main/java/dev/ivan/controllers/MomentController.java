@@ -11,14 +11,14 @@ import dev.ivan.mappers.MomentResponseMapper;
 import dev.ivan.models.EmotionEnum;
 import dev.ivan.models.Moment;
 import dev.ivan.models.MomentTypeEnum;
+import dev.ivan.repositories.MomentCSVRepository;
 import dev.ivan.repositories.MomentRepository;
 import dev.ivan.singletons.MomentRepositorySingleton;
-import dev.ivan.services.MomentCSVService;
 
 public class MomentController {
 
     private final MomentRepository repository;
-      private final MomentCSVService csvService = new MomentCSVService();
+      private final MomentCSVRepository csvService = new MomentCSVRepository();
 
     public MomentController() {
         this.repository = MomentRepositorySingleton.getInstance();
