@@ -1,8 +1,8 @@
 package dev.ivan.db;
 
-import dev.ivan.models.EmotionEnum;
-import dev.ivan.models.Moment;
-import dev.ivan.models.MomentTypeEnum;
+import dev.ivan.models.moment.EmotionEnum;
+import dev.ivan.models.moment.Moment;
+import dev.ivan.models.moment.MomentTypeEnum;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

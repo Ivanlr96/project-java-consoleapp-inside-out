@@ -1,7 +1,8 @@
 package dev.ivan.repositories;
 
 import com.opencsv.CSVWriter;
-import dev.ivan.models.Moment;
+
+import dev.ivan.models.moment.Moment;
 
 import java.io.File;
 import java.io.FileOutputStream;

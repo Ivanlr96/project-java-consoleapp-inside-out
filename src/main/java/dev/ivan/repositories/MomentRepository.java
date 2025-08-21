@@ -2,9 +2,9 @@ package dev.ivan.repositories;
 
 import dev.ivan.contracts.InterfaceDatabase;
 import dev.ivan.db.DiaryDatabase;
-import dev.ivan.models.Moment;
-import dev.ivan.models.MomentTypeEnum;
-import dev.ivan.models.EmotionEnum;
+import dev.ivan.models.moment.EmotionEnum;
+import dev.ivan.models.moment.Moment;
+import dev.ivan.models.moment.MomentTypeEnum;
 
 import java.time.LocalDate;
 import java.util.List;

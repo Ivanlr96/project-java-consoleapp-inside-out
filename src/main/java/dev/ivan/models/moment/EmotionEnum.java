@@ -1,4 +1,4 @@
-package dev.ivan.models;
+package dev.ivan.models.moment;
 
 public enum EmotionEnum {
     ALEGRIA("Alegría"),

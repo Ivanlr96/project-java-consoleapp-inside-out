@@ -1,7 +1,7 @@
 package dev.ivan.db;
 
 import dev.ivan.contracts.InterfaceDatabase;
-import dev.ivan.models.Moment;
+import dev.ivan.models.moment.Moment;
 
 import java.util.ArrayList;
 import java.util.List;

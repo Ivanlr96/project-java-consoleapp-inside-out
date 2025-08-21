@@ -1,8 +1,9 @@
 package dev.ivan.views;
 
 import dev.ivan.dtos.MomentResponseDTO;
-import dev.ivan.models.EmotionEnum;
-import dev.ivan.models.MomentTypeEnum;
+import dev.ivan.models.moment.EmotionEnum;
+import dev.ivan.models.moment.MomentTypeEnum;
+
 import org.junit.jupiter.api.*;
 import org.mockito.MockedStatic;
 import java.io.ByteArrayOutputStream;

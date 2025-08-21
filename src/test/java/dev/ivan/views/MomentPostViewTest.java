@@ -2,7 +2,7 @@ package dev.ivan.views;
 
 import dev.ivan.controllers.MomentController;
 import dev.ivan.dtos.MomentDTO;
-import dev.ivan.models.EmotionEnum;
+import dev.ivan.models.moment.EmotionEnum;
 import dev.ivan.singletons.MomentControllerSingleton;
 import org.junit.jupiter.api.*;
 import org.mockito.MockedStatic;

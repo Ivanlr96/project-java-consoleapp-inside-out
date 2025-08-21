@@ -1,7 +1,7 @@
 package dev.ivan.mappers;
 
 import dev.ivan.dtos.MomentResponseDTO;
-import dev.ivan.models.Moment;
+import dev.ivan.models.moment.Moment;
 
 import java.time.format.DateTimeFormatter;
 

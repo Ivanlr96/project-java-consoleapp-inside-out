@@ -2,7 +2,7 @@ package dev.ivan.views;
 
 import dev.ivan.controllers.MomentController;
 import dev.ivan.dtos.MomentResponseDTO;
-import dev.ivan.models.MomentTypeEnum;
+import dev.ivan.models.moment.MomentTypeEnum;
 import dev.ivan.singletons.MomentControllerSingleton;
 
 import java.util.List;

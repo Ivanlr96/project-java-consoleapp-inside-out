@@ -1,5 +1,10 @@
 package dev.ivan.models;
 import org.junit.jupiter.api.Test;
+
+import dev.ivan.models.moment.EmotionEnum;
+import dev.ivan.models.moment.Moment;
+import dev.ivan.models.moment.MomentTypeEnum;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.*;

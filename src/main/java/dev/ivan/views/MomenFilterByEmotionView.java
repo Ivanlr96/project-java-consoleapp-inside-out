@@ -4,7 +4,7 @@ import java.util.List;
 
 import dev.ivan.controllers.MomentController;
 import dev.ivan.dtos.MomentResponseDTO;
-import dev.ivan.models.EmotionEnum;
+import dev.ivan.models.moment.EmotionEnum;
 import dev.ivan.singletons.MomentControllerSingleton;
 
 public class MomenFilterByEmotionView extends View {

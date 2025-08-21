@@ -1,4 +1,4 @@
-package dev.ivan.models;
+package dev.ivan.models.moment;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

@@ -2,8 +2,8 @@ package dev.ivan.controllers;
 
 import dev.ivan.dtos.MomentDTO;
 import dev.ivan.dtos.MomentResponseDTO;
-import dev.ivan.models.EmotionEnum;
-import dev.ivan.models.MomentTypeEnum;
+import dev.ivan.models.moment.EmotionEnum;
+import dev.ivan.models.moment.MomentTypeEnum;
 import dev.ivan.repositories.MomentRepository;
 import dev.ivan.singletons.MomentRepositorySingleton;
 import org.junit.jupiter.api.*;

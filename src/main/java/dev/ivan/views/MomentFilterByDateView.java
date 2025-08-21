@@ -2,7 +2,7 @@ package dev.ivan.views;
 
 import dev.ivan.controllers.MomentController;
 import dev.ivan.dtos.MomentResponseDTO;
-import dev.ivan.models.Moment;
+import dev.ivan.models.moment.Moment;
 import dev.ivan.singletons.MomentControllerSingleton;
 
 import java.time.LocalDate;

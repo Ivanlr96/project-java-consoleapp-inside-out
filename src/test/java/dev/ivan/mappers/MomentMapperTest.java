@@ -1,9 +1,9 @@
 package dev.ivan.mappers;
 
 import dev.ivan.dtos.MomentDTO;
-import dev.ivan.models.EmotionEnum;
-import dev.ivan.models.Moment;
-import dev.ivan.models.MomentTypeEnum;
+import dev.ivan.models.moment.EmotionEnum;
+import dev.ivan.models.moment.Moment;
+import dev.ivan.models.moment.MomentTypeEnum;
 
 import org.junit.jupiter.api.Test;
 
