@@ -2,6 +2,7 @@ package dev.ivan.models.movie;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import dev.ivan.models.moment.*;
 
@@ -84,13 +85,14 @@ public class Movie {
 
     @Override
     public String toString() {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         return "Película:{"
                 + "ImdbId='" + imdbId + "'"
                 + ", Título='" + title + "'"
                 + ", Géneros=" + genres
                 + ", Emoción=" + (emotion != null ? emotion.getDisplayName() : "N/A")
-                + ", Fecha de lanzamiento=" + releaseYear
-                + ", Creado el=" + createdAt
+                + ", Fecha de lanzamiento=" + releaseYear.format(dateFormatter)
+                + ", Creado el=" + createdAt.format(dateFormatter)
                 + "}";
     }
 }
