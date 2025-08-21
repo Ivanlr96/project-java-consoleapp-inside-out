@@ -56,7 +56,7 @@ public class MovieCSVRepository {
         try (CSVReader reader = new CSVReaderBuilder(new FileReader(file))
                 .withCSVParser(new com.opencsv.CSVParserBuilder().withSeparator(';').build())
                 .build()) {
-            reader.readNext(); // Skip header
+            reader.readNext();
             String[] line;
             while ((line = reader.readNext()) != null) {
                 String imdbId = line[0];
@@ -90,5 +90,11 @@ public class MovieCSVRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Movie> findByGenre(String genre) {
+        return findAll().stream()
+                .filter(movie -> movie.getGenres().stream().anyMatch(g -> g.equalsIgnoreCase(genre)))
+                .collect(Collectors.toList());
     }
 }

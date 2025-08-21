@@ -20,7 +20,8 @@ public class HomeView extends View {
                 6. Añadir película
                 7. Ver todas las películas
                 8. Eliminar película
-                9. Salir
+                9. Filtrar películas por género
+                10. Salir
                 Seleccione una opción:
                 """;
 
@@ -53,11 +54,14 @@ public class HomeView extends View {
             new MovieController().deleteMovie();
         }
         if (option == 9) {
+            new MovieController().showMoviesByGenre();
+        }
+        if (option == 10) {
             System.out.println("¡Hasta la proxima!");
             System.exit(0);
         }
 
-        if (option < 1 || option > 9) {
+        if (option < 1 || option > 10) {
             System.out.println("Opción inválida. Inténtalo de nuevo.");
             printMenu();
         }

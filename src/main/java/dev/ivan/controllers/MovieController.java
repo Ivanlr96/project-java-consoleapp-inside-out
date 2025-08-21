@@ -6,6 +6,7 @@ import dev.ivan.repositories.MovieCSVRepository;
 import dev.ivan.services.MovieService;
 import dev.ivan.views.AllMoviesView;
 import dev.ivan.views.MovieDeleteView;
+import dev.ivan.views.MovieFilterByGenreView;
 import dev.ivan.views.MoviePostView;
 
 import java.util.List;
@@ -16,12 +17,14 @@ public class MovieController {
     private final MovieCSVRepository movieCSVRepository;
     private final MoviePostView moviePostView;
     private final MovieDeleteView movieDeleteView;
+    private final MovieFilterByGenreView movieFilterByGenreView;
 
     public MovieController() {
         this.movieService = new MovieService();
         this.movieCSVRepository = new MovieCSVRepository();
         this.moviePostView = new MoviePostView();
         this.movieDeleteView = new MovieDeleteView();
+        this.movieFilterByGenreView = new MovieFilterByGenreView();
     }
 
     public void addMovie() {
@@ -60,4 +63,11 @@ public class MovieController {
             movieDeleteView.printInvalidIndex();
         }
     }
+
+    public void showMoviesByGenre() {
+        String genre = movieFilterByGenreView.display();
+        List<Movie> movies = movieCSVRepository.findByGenre(genre);
+        AllMoviesView.display(movies);
+    }
+
 }
