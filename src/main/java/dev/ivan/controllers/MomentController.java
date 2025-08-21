@@ -3,7 +3,7 @@ package dev.ivan.controllers;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-import dev.ivan.views.AllMomentsView;
+
 import dev.ivan.dtos.MomentDTO;
 import dev.ivan.dtos.MomentResponseDTO;
 import dev.ivan.mappers.MomentMapper;
@@ -14,6 +14,7 @@ import dev.ivan.models.moment.MomentTypeEnum;
 import dev.ivan.repositories.MomentCSVRepository;
 import dev.ivan.repositories.MomentRepository;
 import dev.ivan.singletons.MomentRepositorySingleton;
+import dev.ivan.views.moment.AllMomentsView;
 
 public class MomentController {
 

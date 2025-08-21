@@ -1,4 +1,4 @@
-package dev.ivan.views;
+package dev.ivan.views.movie;
 
 import dev.ivan.models.moment.EmotionEnum;
 import dev.ivan.models.movie.Movie;

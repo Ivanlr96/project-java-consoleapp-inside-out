@@ -1,4 +1,6 @@
-package dev.ivan.views;
+package dev.ivan.views.moment;
+
+import dev.ivan.views.View;
 
 public class MomentFilterView extends View {
 

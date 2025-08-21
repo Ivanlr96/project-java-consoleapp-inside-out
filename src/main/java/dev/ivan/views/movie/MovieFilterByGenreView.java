@@ -1,4 +1,4 @@
-package dev.ivan.views;
+package dev.ivan.views.movie;
 
 import java.util.Arrays;
 import java.util.List;

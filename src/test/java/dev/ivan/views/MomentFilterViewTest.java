@@ -15,6 +15,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 
+import dev.ivan.views.moment.MomenFilterByEmotionView;
+import dev.ivan.views.moment.MomentFilterByDateView;
+import dev.ivan.views.moment.MomentFilterByTypeView;
+import dev.ivan.views.moment.MomentFilterView;
+
 public class MomentFilterViewTest {
 
     private final InputStream systemIn = System.in;

@@ -1,9 +1,11 @@
-package dev.ivan.views;
+package dev.ivan.views.moment;
 
 import dev.ivan.controllers.MomentController;
 import dev.ivan.dtos.MomentResponseDTO;
 import dev.ivan.models.moment.MomentTypeEnum;
 import dev.ivan.singletons.MomentControllerSingleton;
+import dev.ivan.views.HomeView;
+import dev.ivan.views.View;
 
 import java.util.List;
 

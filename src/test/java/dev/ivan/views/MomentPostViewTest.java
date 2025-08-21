@@ -4,6 +4,8 @@ import dev.ivan.controllers.MomentController;
 import dev.ivan.dtos.MomentDTO;
 import dev.ivan.models.moment.EmotionEnum;
 import dev.ivan.singletons.MomentControllerSingleton;
+import dev.ivan.views.moment.MomentPostView;
+
 import org.junit.jupiter.api.*;
 import org.mockito.MockedStatic;
 

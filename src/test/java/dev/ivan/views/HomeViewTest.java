@@ -15,6 +15,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 
+import dev.ivan.views.moment.MomentDeleteView;
+import dev.ivan.views.moment.MomentFilterView;
+import dev.ivan.views.moment.MomentPostView;
+
 public class HomeViewTest {
 
     private final InputStream systemIn = System.in;

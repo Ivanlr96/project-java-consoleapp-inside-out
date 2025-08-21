@@ -4,10 +4,10 @@ import dev.ivan.models.moment.EmotionEnum;
 import dev.ivan.models.movie.Movie;
 import dev.ivan.repositories.MovieCSVRepository;
 import dev.ivan.services.MovieService;
-import dev.ivan.views.AllMoviesView;
-import dev.ivan.views.MovieDeleteView;
-import dev.ivan.views.MovieFilterByGenreView;
-import dev.ivan.views.MoviePostView;
+import dev.ivan.views.movie.AllMoviesView;
+import dev.ivan.views.movie.MovieDeleteView;
+import dev.ivan.views.movie.MovieFilterByGenreView;
+import dev.ivan.views.movie.MoviePostView;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package dev.ivan.views;
+package dev.ivan.views.moment;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -8,8 +8,9 @@ import dev.ivan.models.moment.EmotionEnum;
 import dev.ivan.models.moment.MomentTypeEnum;
 import dev.ivan.controllers.MomentController;
 import dev.ivan.dtos.MomentDTO;
-import dev.ivan.views.HomeView;
 import dev.ivan.singletons.MomentControllerSingleton;
+import dev.ivan.views.HomeView;
+import dev.ivan.views.View;
 
 public class MomentPostView extends View {
 

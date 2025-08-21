@@ -3,6 +3,7 @@ package dev.ivan.views;
 import dev.ivan.dtos.MomentResponseDTO;
 import dev.ivan.models.moment.EmotionEnum;
 import dev.ivan.models.moment.MomentTypeEnum;
+import dev.ivan.views.moment.AllMomentsView;
 
 import org.junit.jupiter.api.*;
 import org.mockito.MockedStatic;

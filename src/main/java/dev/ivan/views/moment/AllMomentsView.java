@@ -1,8 +1,10 @@
-package dev.ivan.views;
+package dev.ivan.views.moment;
 
 import java.util.List;
 
 import dev.ivan.dtos.MomentResponseDTO;
+import dev.ivan.views.HomeView;
+import dev.ivan.views.View;
 
 public class AllMomentsView extends View {
 
