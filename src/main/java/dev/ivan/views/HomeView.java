@@ -3,10 +3,12 @@ package dev.ivan.views;
 import dev.ivan.controllers.MovieController;
 import dev.ivan.controllers.MomentController;
 import dev.ivan.singletons.MomentControllerSingleton;
+import dev.ivan.singletons.MovieControllerSingleton;
 
 public class HomeView extends View {
 
     public static final MomentController momentController = MomentControllerSingleton.getInstance();
+    public static final MovieController movieController = MovieControllerSingleton.getInstance();
 
     public static void printMenu() {
 
@@ -45,16 +47,16 @@ public class HomeView extends View {
             MomentCSVStoreView.printExportMenu();
         }
         if (option == 6) {
-            new MovieController().addMovie();
+            movieController.addMovie();
         }
         if (option == 7) {
-            new MovieController().showAllMovies();
+            movieController.showAllMovies();
         }
         if (option == 8) {
-            new MovieController().deleteMovie();
+            movieController.deleteMovie();
         }
         if (option == 9) {
-            new MovieController().showMoviesByGenre();
+            movieController.showMoviesByGenre();
         }
         if (option == 10) {
             System.out.println("¡Hasta la proxima!");
