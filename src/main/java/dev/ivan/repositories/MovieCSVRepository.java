@@ -1,12 +1,20 @@
 package dev.ivan.repositories;
 
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvValidationException;
+import dev.ivan.models.moment.EmotionEnum;
 import dev.ivan.models.movie.Movie;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Collections;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MovieCSVRepository {
@@ -30,7 +38,7 @@ public class MovieCSVRepository {
 
     private void writeHeader() throws IOException {
         try (CSVWriter writer = new CSVWriter(new FileWriter(file, true), ';', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END)) {
-            writer.writeNext(new String[]{"imdbId", "Titulo", "Genero", "Emocion", "Fecha de estreno", "Fecha de Creacion"});
+            writer.writeNext(new String[]{"ImdbId", "Titulo", "Genero", "Emocion", "Fecha de estreno", "Fecha de creacion"});
         }
     }
 
@@ -40,5 +48,30 @@ public class MovieCSVRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Movie> findAll() {
+        List<Movie> movies = new ArrayList<>();
+        try (CSVReader reader = new CSVReaderBuilder(new FileReader(file))
+                .withCSVParser(new com.opencsv.CSVParserBuilder().withSeparator(';').build())
+                .build()) {
+            reader.readNext();
+            String[] line;
+            while ((line = reader.readNext()) != null) {
+                String imdbId = line[0];
+                String title = line[1];
+                List<String> genres = Arrays.asList(line[2].split(","));
+                EmotionEnum emotion = EmotionEnum.valueOf(line[3]);
+                LocalDate releaseYear = LocalDate.parse(line[4]);
+                LocalDateTime createdAt = LocalDateTime.parse(line[5]);
+
+                Movie movie = new Movie(imdbId, title, genres, emotion, releaseYear);
+                movie.setCreatedAt(createdAt);
+                movies.add(movie);
+            }
+        } catch (IOException | CsvValidationException e) {
+            e.printStackTrace();
+        }
+        return movies;
     }
 }

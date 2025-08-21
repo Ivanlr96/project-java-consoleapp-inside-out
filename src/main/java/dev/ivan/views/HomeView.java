@@ -18,7 +18,8 @@ public class HomeView extends View {
                 4. Filtrar los momentos
                 5. Exportar a CSV
                 6. Añadir película
-                7. Salir
+                7. Ver todas las películas
+                8. Salir
                 Seleccione una opción:
                 """;
 
@@ -45,11 +46,14 @@ public class HomeView extends View {
             new MovieController().addMovie();
         }
         if (option == 7) {
+            new MovieController().showAllMovies();
+        }
+        if (option == 8) {
             System.out.println("¡Hasta la proxima!");
             System.exit(0);
         }
 
-        if (option < 1 || option > 7) {
+        if (option < 1 || option > 8) {
             System.out.println("Opción inválida. Inténtalo de nuevo.");
             printMenu();
         }

@@ -4,7 +4,10 @@ import dev.ivan.models.moment.EmotionEnum;
 import dev.ivan.models.movie.Movie;
 import dev.ivan.repositories.MovieCSVRepository;
 import dev.ivan.services.MovieService;
+import dev.ivan.views.AllMoviesView;
 import dev.ivan.views.MoviePostView;
+
+import java.util.List;
 
 public class MovieController {
 
@@ -26,7 +29,13 @@ public class MovieController {
         Movie movie = movieService.getMovie(imdbId, emotion);
         movieCSVRepository.save(movie);
 
-        System.out.println("Movie added successfully:");
+        System.out.println("Pelicula Añadida con éxito:");
         System.out.println(movie);
+
+    }
+
+    public void showAllMovies() {
+        List<Movie> movies = movieCSVRepository.findAll();
+        AllMoviesView.display(movies);
     }
 }

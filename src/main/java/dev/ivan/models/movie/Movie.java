@@ -9,10 +9,10 @@ public class Movie {
 
     private String imdbId;
     private String title;
-    private List<String> genres; 
-    private EmotionEnum emotion; 
-    private LocalDate releaseYear; 
-    private LocalDateTime createdAt; 
+    private List<String> genres;
+    private EmotionEnum emotion;
+    private LocalDate releaseYear;
+    private LocalDateTime createdAt;
 
     public Movie(String imdbId, String title, List<String> genres, EmotionEnum emotion, LocalDate releaseYear) {
         this.imdbId = imdbId;
@@ -76,7 +76,7 @@ public class Movie {
                 imdbId,
                 title,
                 String.join(",", genres),
-                emotion.getDisplayName(),
+                emotion.name(),
                 releaseYear.toString(),
                 createdAt.toString()
         };
@@ -84,13 +84,13 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movie{"
-                + "imdbId='" + imdbId + "'"
-                + ", title='" + title + "'"
-                + ", genres=" + genres
-                + ", emotion=" + (emotion != null ? emotion.getDisplayName() : "N/A")
-                + ", releaseYear=" + releaseYear
-                + ", createdAt=" + createdAt
+        return "Película:{"
+                + "ImdbId='" + imdbId + "'"
+                + ", Título='" + title + "'"
+                + ", Géneros=" + genres
+                + ", Emoción=" + (emotion != null ? emotion.getDisplayName() : "N/A")
+                + ", Fecha de lanzamiento=" + releaseYear
+                + ", Creado el=" + createdAt
                 + "}";
     }
 }
