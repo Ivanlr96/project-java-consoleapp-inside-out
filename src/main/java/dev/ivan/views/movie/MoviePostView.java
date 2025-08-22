@@ -2,6 +2,7 @@ package dev.ivan.views.movie;
 
 import dev.ivan.models.moment.EmotionEnum;
 import dev.ivan.models.movie.Movie;
+import dev.ivan.views.HomeView;
 
 import java.util.Scanner;
 
@@ -37,9 +38,11 @@ public class MoviePostView {
     public void printSuccess(Movie movie) {
         System.out.println("Pelicula añadida con éxito:");
         System.out.println(movie);
+        HomeView.printMenu();
     }
 
     public void printError() {
         System.out.println("Error al añadir la película.");
+        HomeView.printMenu();
     }
 }
