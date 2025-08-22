@@ -39,7 +39,7 @@ public class MovieCSVRepository {
 
     private void writeHeader() throws IOException {
         try (CSVWriter writer = new CSVWriter(new FileWriter(file), ';', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.DEFAULT_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END)) {
-            writer.writeNext(new String[]{"imdbId", "title", "genres", "emotion", "releaseYear", "createdAt"});
+            writer.writeNext(new String[]{"ImdbId", "Titulo", "Genero", "Emocion", "Fecha de estreno", "Creado en"});
         }
     }
 
