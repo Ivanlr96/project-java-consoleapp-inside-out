@@ -3,6 +3,7 @@ package dev.ivan.views.movie;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import dev.ivan.views.HomeView;
 
 public class MovieFilterByGenreView {
 
@@ -34,5 +35,7 @@ public class MovieFilterByGenreView {
         }
 
         return IMDB_GENRES.get(choice - 1);
+
     }
+
 }

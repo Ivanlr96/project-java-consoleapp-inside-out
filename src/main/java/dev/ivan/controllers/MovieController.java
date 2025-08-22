@@ -70,6 +70,7 @@ public class MovieController {
         String genre = movieFilterByGenreView.display();
         List<Movie> movies = movieCSVRepository.findByGenre(genre);
         AllMoviesView.display(movies);
+        HomeView.printMenu();
     }
 
 }
