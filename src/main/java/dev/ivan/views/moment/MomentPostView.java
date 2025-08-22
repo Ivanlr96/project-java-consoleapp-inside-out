@@ -17,13 +17,16 @@ public class MomentPostView extends View {
     private static MomentController CONTROLLER = MomentControllerSingleton.getInstance();
 
     public static void printStoreMenu() {
+        SCANNER.nextLine();
+
         System.out.println("Ingrese el título:");
-        String title = SCANNER.next();
+        String title = SCANNER.nextLine();
+
         LocalDate date = null;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         while (date == null) {
             System.out.println("Ingrese la fecha (dd/MM/yyyy):");
-            String dateInput = SCANNER.next();
+            String dateInput = SCANNER.nextLine();
             try {
                 date = LocalDate.parse(dateInput, formatter);
             } catch (DateTimeParseException e) {
@@ -32,7 +35,7 @@ public class MomentPostView extends View {
         }
 
         System.out.println("Ingrese la descripción:");
-        String description = SCANNER.next();
+        String description = SCANNER.nextLine();
 
         System.out.println("Seleccione la emoción:");
         for (EmotionEnum e : EmotionEnum.values()) {
@@ -54,4 +57,5 @@ public class MomentPostView extends View {
 
         HomeView.printMenu();
     }
+
 }
