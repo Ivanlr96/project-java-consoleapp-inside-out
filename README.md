@@ -73,6 +73,21 @@ Mi Diario es una aplicación de consola que permite a los usuarios gestionar sus
    - **Criterios de aceptación:**
      - El programa debe cerrarse de manera segura al seleccionar la opción de salida.
 
+##  Pre-requisitos
+
+Antes de ejecutar este proyecto asegúrate de tener instalado:
+
+- [Java 17 o superior](https://adoptium.net/)
+- [Maven 3.8+](https://maven.apache.org/) (para gestionar dependencias y compilar el proyecto)
+
+## Pasos para la instalación
+
+1. Clonar este repositorio:
+   ```bash
+   git clone https://github.com/Ivanlr96/project-java-consoleapp-inside-out
+   cd project-java-consoleapp-inside-out
+   Ejecutar el programa desde App.java
+
 
 ## Diagrama de Clases
 
