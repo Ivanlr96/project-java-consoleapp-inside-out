@@ -20,6 +20,5 @@ public class AllMoviesView {
 
 
         }
-          HomeView.printMenu();
     }
 }

@@ -4,6 +4,7 @@ import dev.ivan.models.moment.EmotionEnum;
 import dev.ivan.models.movie.Movie;
 import dev.ivan.repositories.MovieCSVRepository;
 import dev.ivan.services.MovieService;
+import dev.ivan.views.HomeView;
 import dev.ivan.views.movie.AllMoviesView;
 import dev.ivan.views.movie.MovieDeleteView;
 import dev.ivan.views.movie.MovieFilterByGenreView;
@@ -44,6 +45,7 @@ public class MovieController {
     public void showAllMovies() {
         List<Movie> movies = movieCSVRepository.findAll();
         AllMoviesView.display(movies);
+        HomeView.printMenu();
     }
 
     public void deleteMovie() {
