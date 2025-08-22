@@ -20,16 +20,18 @@ public class MovieDeleteView {
 
     public void printSuccess() {
         System.out.println("Pelicula eliminada con éxito.");
-        HomeView.printMenu();
+
     }
 
     public void printInvalidIndex() {
         System.out.println("Número de película no válido.");
-        HomeView.printMenu();
+        return;
+
     }
 
     public void printNoMoviesToDelete() {
         System.out.println("No hay películas para eliminar.");
         HomeView.printMenu();
+
     }
 }

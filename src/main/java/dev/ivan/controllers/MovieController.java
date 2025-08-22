@@ -64,6 +64,7 @@ public class MovieController {
         } else {
             movieDeleteView.printInvalidIndex();
         }
+              HomeView.printMenu();
     }
 
     public void showMoviesByGenre() {
