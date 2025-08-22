@@ -252,3 +252,6 @@ classDiagram
 
 ## Tests
 ![Tests](image.png)
+
+## Autor:
+Iván Lorenzo
